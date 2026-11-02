@@ -1,0 +1,110 @@
+body {
+  margin: 0;
+  background: #D1EBD4;
+  overflow: hidden;
+  text-align: center;
+  height: 100vh;
+}
+body svg {
+  margin: 0 auto;
+  width: 400px;
+  position: relative;
+  z-index: 1;
+  top: 50%;
+  height: 100%;
+}
+body svg .line:nth-of-type(1) {
+  animation: dash_loader 1s 1.5s linear forwards;
+}
+body svg .line:nth-of-type(2) {
+  animation: dash_loader 1s 1.6s linear forwards;
+}
+body svg .line:nth-of-type(3) {
+  animation: dash_loader 1s 1.7s linear forwards;
+}
+body svg .line:nth-of-type(4) {
+  animation: dash_loader 1s 1.8s linear forwards;
+}
+body svg .line:nth-of-type(5) {
+  animation: dash_loader 1s 1.9s linear forwards;
+}
+body svg .line:nth-of-type(6) {
+  animation: dash_loader 1s 2s linear forwards;
+}
+body svg .line:nth-of-type(7) {
+  animation: dash_loader 1s 2.1s linear forwards;
+}
+body svg .line:nth-of-type(8) {
+  animation: dash_loader 1s 2.2s linear forwards;
+}
+body svg .line:nth-of-type(9) {
+  animation: dash_loader 1s 2.3s linear forwards;
+}
+body svg .line:nth-of-type(10) {
+  animation: dash_loader 1s 2.4s linear forwards;
+}
+
+.forest img {
+  height: 100%;
+  max-height: 1000px;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+}
+.forest img:nth-of-type(1) {
+  animation: popup 0.7s 0.1s forwards cubic-bezier(0, 0.615, 0, 0.995);
+}
+.forest img:nth-of-type(2) {
+  animation: popup 0.7s 0.2s forwards cubic-bezier(0, 0.615, 0, 0.995);
+}
+.forest img:nth-of-type(3) {
+  animation: popup 0.7s 0.3s forwards cubic-bezier(0, 0.615, 0, 0.995);
+}
+.forest img:nth-of-type(4) {
+  animation: popup 0.7s 0.4s forwards cubic-bezier(0, 0.615, 0, 0.995);
+}
+.forest img:nth-of-type(5) {
+  animation: popup 0.7s 0.5s forwards cubic-bezier(0, 0.615, 0, 0.995);
+}
+.forest img:nth-of-type(6) {
+  animation: popup 0.7s 0.6s forwards cubic-bezier(0, 0.615, 0, 0.995);
+}
+.forest img:nth-of-type(7) {
+  animation: popup 0.7s 0.7s forwards cubic-bezier(0, 0.615, 0, 0.995);
+}
+.forest img:nth-of-type(8) {
+  animation: popup 0.7s 0.8s forwards cubic-bezier(0, 0.615, 0, 0.995);
+}
+.forest img:nth-of-type(9) {
+  animation: popup 0.7s 0.9s forwards cubic-bezier(0, 0.615, 0, 0.995);
+}
+.forest img:nth-of-type(10) {
+  animation: popup 0.7s 1s forwards cubic-bezier(0, 0.615, 0, 0.995);
+}
+@keyframes popup {
+  from {
+    bottom: -100%;
+  }
+  to {
+    bottom: 0;
+  }
+}
+path, polyline, line {
+  stroke-dasharray: 750;
+  stroke-dashoffset: 750;
+  stroke-width: 12px;
+  stroke-miterlimit: 10;
+  stroke-linejoin: round;
+  fill: none;
+  stroke: white;
+  z-index: 1;
+  opacity: 1;
+}
+
+@keyframes dash_loader {
+  to {
+    stroke-dashoffset: 0;
+    stroke-width: 3px;
+    stroke: white;
+  }
+}
