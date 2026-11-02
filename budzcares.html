@@ -528,7 +528,6 @@
                 <a href="index.html#about" class="px-3 py-2 text-sm font-semibold text-white/90 hover:text-budz-goldLight transition-colors">About</a>
                 <a href="index.html#specials" class="px-3 py-2 text-sm font-semibold text-white/90 hover:text-budz-goldLight transition-colors">Specials</a>
                 <a href="budzcares.html#community" class="px-3 py-2 text-sm font-semibold text-white/90 hover:text-budz-goldLight transition-colors">Budz Cares</a>
-                <a href="budzcares.html#forum" class="px-3 py-2 text-sm font-semibold text-white/90 hover:text-budz-goldLight transition-colors">Forum</a>
                 <a href="index.html#products" class="px-3 py-2 text-sm font-semibold text-white/90 hover:text-budz-goldLight transition-colors">Products</a>
                 <a href="index.html#locations" class="px-3 py-2 text-sm font-semibold text-white/90 hover:text-budz-goldLight transition-colors">Locations</a>
                 <a href="index.html#contact" class="px-3 py-2 text-sm font-semibold text-white/90 hover:text-budz-goldLight transition-colors">Contact</a>
@@ -552,7 +551,6 @@
             <a href="index.html#about" class="mobile-link block px-4 py-2.5 rounded-lg text-base font-medium text-white hover:bg-white/10">About Us</a>
             <a href="index.html#specials" class="mobile-link block px-4 py-2.5 rounded-lg text-base font-medium text-white hover:bg-white/10">Specials &amp; Deals</a>
             <a href="budzcares.html#community" class="mobile-link block px-4 py-2.5 rounded-lg text-base font-medium text-white hover:bg-white/10">Budz Cares Foundation</a>
-            <a href="budzcares.html#forum" class="mobile-link block px-4 py-2.5 rounded-lg text-base font-medium text-white hover:bg-white/10">Community Forum</a>
             <a href="index.html#products" class="mobile-link block px-4 py-2.5 rounded-lg text-base font-medium text-white hover:bg-white/10">Products</a>
             <a href="index.html#locations" class="mobile-link block px-4 py-2.5 rounded-lg text-base font-medium text-white hover:bg-white/10">Locations &amp; Hours</a>
             <a href="index.html#contact" class="mobile-link block px-4 py-2.5 rounded-lg text-base font-medium text-white hover:bg-white/10">Contact Us</a>
@@ -681,16 +679,10 @@
             </div>
         </section>
 
-        <!-- Community Forum Section -->
-        <section id="forum" class="py-20 px-4 sm:px-6 lg:px-8 border-y border-budz-line relative overflow-hidden bg-[rgba(14,36,18,0.35)]">
+        <!-- Turkey Support Section -->
+        <section id="turkey-program" class="py-20 px-4 sm:px-6 lg:px-8 border-y border-budz-line relative overflow-hidden bg-[rgba(14,36,18,0.35)]">
             <div class="absolute inset-0 bg-[radial-gradient(700px_450px_at_80%_100%,rgba(52,107,59,0.05),transparent)] pointer-events-none"></div>
             <div class="max-w-5xl mx-auto">
-                <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
-                    <span class="text-xs font-bold font-heading uppercase tracking-widest text-budz-gold">Connect &amp; Discuss</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold font-heading text-budz-greenDeep">Community Forum</h2>
-                    <p class="text-budz-muted text-lg">Share local resources, ask questions, and connect around foundation projects.</p>
-                </div>
-
                 <!-- Thanksgiving 2026 Community Support -->
                 <article id="turkey-application" class="budz-card p-6 sm:p-8 mb-8">
                   <div class="max-w-3xl">
@@ -756,58 +748,6 @@
                   </div>
                 </article>
 
-                <!-- Forum Wrapper -->
-                <div class="budz-card p-6 sm:p-8 bg-budz-surface shadow-xl">
-                    <!-- Controls Bar -->
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-6 border-b border-budz-line">
-                        <div class="flex flex-wrap gap-2">
-                            <button onclick="filterForum('all', this)" class="forum-filter-btn active px-3.5 py-1.5 rounded-full text-xs font-bold bg-budz-green text-white">All Topics</button>
-                            <button onclick="filterForum('turkey', this)" class="forum-filter-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-budz-paper text-budz-muted hover:bg-budz-green/10">Turkey Drive</button>
-                            <button onclick="filterForum('growing', this)" class="forum-filter-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-budz-paper text-budz-muted hover:bg-budz-green/10">Growing &amp; Plants</button>
-                        </div>
-                        <button onclick="toggleNewPostForm()" class="px-5 py-2.5 rounded-full font-heading font-bold text-xs uppercase tracking-wider text-budz-greenDarkest bg-budz-gold hover:bg-budz-goldLight transition-colors">
-                            Start New Discussion
-                        </button>
-                    </div>
-
-                    <!-- New Discussion Form Modal/Container -->
-                    <div id="new-post-box" class="hidden mb-8 p-6 bg-budz-paper rounded-2xl border border-budz-line">
-                        <h3 class="text-lg font-bold font-heading text-budz-greenDeep mb-4">Post a Topic to the Community</h3>
-                        <form id="forum-form" onsubmit="handleNewPost(event)" class="space-y-4">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-xs font-bold text-budz-greenDeep mb-1">Your Name / Alias *</label>
-                                    <input type="text" id="post-author" required placeholder="e.g. MedwayGardener" class="w-full px-3.5 py-2 rounded-xl bg-white border border-budz-line text-sm focus:outline-none focus:ring-2 focus:ring-budz-gold">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold text-budz-greenDeep mb-1">Category *</label>
-                                    <select id="post-category" required class="w-full px-3.5 py-2 rounded-xl bg-white border border-budz-line text-sm focus:outline-none focus:ring-2 focus:ring-budz-gold">
-                                        <option value="turkey">Turkey Drive &amp; Relief</option>
-                                        <option value="growing">Growing &amp; Plants</option>
-                                        <option value="general" selected>General Discussion</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-budz-greenDeep mb-1">Topic Title *</label>
-                                <input type="text" id="post-title" required placeholder="Summarize your question or story..." class="w-full px-3.5 py-2 rounded-xl bg-white border border-budz-line text-sm focus:outline-none focus:ring-2 focus:ring-budz-gold">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-budz-greenDeep mb-1">Message *</label>
-                                <textarea id="post-content" rows="3" required placeholder="Write your post here..." class="w-full px-3.5 py-2 rounded-xl bg-white border border-budz-line text-sm focus:outline-none focus:ring-2 focus:ring-budz-gold"></textarea>
-                            </div>
-                            <div class="flex gap-3">
-                                <button type="submit" class="px-5 py-2 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-white bg-budz-green hover:bg-budz-greenLight">Publish Discussion</button>
-                                <button type="button" onclick="toggleNewPostForm()" class="px-5 py-2 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-budz-muted bg-budz-paper">Cancel</button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- Dynamic Post Feed -->
-                    <div id="forum-feed" class="space-y-4">
-                        <!-- Rendered dynamically by JS -->
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -833,7 +773,6 @@
                     <li><a href="index.html#about" class="hover:text-budz-goldLight transition-colors">About Us</a></li>
                     <li><a href="index.html#specials" class="hover:text-budz-goldLight transition-colors">Specials &amp; Savings</a></li>
                     <li><a href="budzcares.html#community" class="hover:text-budz-goldLight transition-colors">Budz Cares Foundation</a></li>
-                    <li><a href="budzcares.html#forum" class="hover:text-budz-goldLight transition-colors">Community Forum</a></li>
                 </ul>
             </div>
 
@@ -910,167 +849,6 @@
           activeBtn.classList.add('bg-budz-green', 'text-white');
           activeBtn.classList.remove('text-budz-muted');
           activePanel.classList.remove('hidden');
-        }
-      }
-
-      // 3. Interactive Forum Logic with LocalStorage
-      const initialPosts = [
-        {
-          id: 1,
-          author: 'BudzCaresTeam',
-          category: 'turkey',
-          title: '2026 Thanksgiving Turkey Program Applications are Open!',
-          content: 'Applications for our free Thanksgiving turkey drive close November 1st, with pickup scheduled for Friday, November 20th at Budz Emporium in Medway. Please spread the word to local families in need!',
-          date: 'Nov 1, 2026',
-          replies: [
-            { author: 'MedwayNeighbor', text: 'Thank you for doing this every year!' }
-          ]
-        },
-        {
-          id: 2,
-          author: 'GreenThumb207',
-          category: 'growing',
-          title: 'Tips for winter indoor live plant lighting in Maine?',
-          content: 'Anyone picking up live plant starts from Budz this season? What spectrum LED grow light setups are working best for your winter tents?',
-          date: 'Nov 2, 2026',
-          replies: []
-        }
-      ];
-
-      function getForumPosts() {
-        const data = localStorage.getItem('budz_emporium_forum_posts');
-        if (!data) {
-          localStorage.setItem('budz_emporium_forum_posts', JSON.stringify(initialPosts));
-          return initialPosts;
-        }
-        try {
-          return JSON.parse(data);
-        } catch(e) {
-          return initialPosts;
-        }
-      }
-
-      let currentCategory = 'all';
-
-      function renderForumFeed() {
-        const feed = document.getElementById('forum-feed');
-        const posts = getForumPosts();
-        feed.innerHTML = '';
-
-        const filtered = currentCategory === 'all' 
-          ? posts 
-          : posts.filter(p => p.category === currentCategory);
-
-        if (filtered.length === 0) {
-          feed.innerHTML = '<div class="text-center py-8 text-budz-muted text-sm">No topics in this category yet. Be the first to start a conversation!</div>';
-          return;
-        }
-
-        const catNames = {
-          turkey: 'Turkey Drive',
-          growing: 'Growing & Plants',
-          general: 'General'
-        };
-
-        filtered.forEach(post => {
-          const card = document.createElement('div');
-          card.className = 'p-5 rounded-2xl bg-budz-paper border border-budz-line space-y-3';
-          
-          let repliesMarkup = '';
-          if (post.replies && post.replies.length > 0) {
-            repliesMarkup = '<div class="mt-3 pt-3 border-t border-budz-line space-y-2">';
-            post.replies.forEach(r => {
-              repliesMarkup += `<div class="p-2.5 rounded-lg bg-white/70 text-xs text-budz-ink"><strong class="text-budz-green">${r.author}:</strong> ${r.text}</div>`;
-            });
-            repliesMarkup += '</div>';
-          }
-
-          card.innerHTML = `
-            <div class="flex justify-between items-center text-xs">
-              <span class="px-2.5 py-1 rounded-full font-bold bg-emerald-100 text-budz-green uppercase">${catNames[post.category] || 'General'}</span>
-              <span class="text-budz-muted">Posted by <strong>${post.author}</strong> &bull; ${post.date}</span>
-            </div>
-            <h4 class="text-base font-bold text-budz-greenDeep">${post.title}</h4>
-            <p class="text-xs text-budz-muted leading-relaxed">${post.content}</p>
-            ${repliesMarkup}
-            <div class="pt-2">
-              <button onclick="toggleReplyBox(${post.id})" class="text-xs font-bold text-budz-green hover:underline">?? Reply (${post.replies ? post.replies.length : 0})</button>
-            </div>
-            <div id="reply-box-${post.id}" class="hidden pt-3 border-t border-budz-line space-y-2">
-              <input type="text" id="reply-author-${post.id}" placeholder="Your Name" class="w-full px-3 py-1.5 text-xs rounded-lg bg-white border border-budz-line">
-              <textarea id="reply-text-${post.id}" rows="2" placeholder="Write your reply..." class="w-full px-3 py-1.5 text-xs rounded-lg bg-white border border-budz-line"></textarea>
-              <button onclick="submitReply(${post.id})" class="px-4 py-1.5 rounded-lg font-bold text-xs uppercase text-white bg-budz-green hover:bg-budz-greenLight">Submit Reply</button>
-            </div>
-          `;
-          feed.appendChild(card);
-        });
-      }
-
-      function filterForum(cat, selectedButton) {
-        currentCategory = cat;
-        document.querySelectorAll('.forum-filter-btn').forEach(btn => {
-          btn.classList.remove('bg-budz-green', 'text-white');
-          btn.classList.add('bg-budz-paper', 'text-budz-muted');
-        });
-        const activeButton = selectedButton || document.querySelector(`.forum-filter-btn[onclick*="'${cat}'"]`);
-        if (activeButton) {
-          activeButton.classList.add('bg-budz-green', 'text-white');
-          activeButton.classList.remove('bg-budz-paper', 'text-budz-muted');
-        }
-        renderForumFeed();
-      }
-
-      function toggleNewPostForm() {
-        const box = document.getElementById('new-post-box');
-        box.classList.toggle('hidden');
-      }
-
-      function handleNewPost(e) {
-        e.preventDefault();
-        const author = document.getElementById('post-author').value.trim();
-        const category = document.getElementById('post-category').value;
-        const title = document.getElementById('post-title').value.trim();
-        const content = document.getElementById('post-content').value.trim();
-
-        if (!author || !title || !content) return;
-
-        const posts = getForumPosts();
-        posts.unshift({
-          id: Date.now(),
-          author,
-          category,
-          title,
-          content,
-          date: 'Just now',
-          replies: []
-        });
-
-        localStorage.setItem('budz_emporium_forum_posts', JSON.stringify(posts));
-        document.getElementById('forum-form').reset();
-        toggleNewPostForm();
-        renderForumFeed();
-      }
-
-      function toggleReplyBox(id) {
-        const box = document.getElementById(`reply-box-${id}`);
-        if (box) box.classList.toggle('hidden');
-      }
-
-      function submitReply(id) {
-        const authorInput = document.getElementById(`reply-author-${id}`);
-        const textInput = document.getElementById(`reply-text-${id}`);
-        const author = authorInput.value.trim();
-        const text = textInput.value.trim();
-
-        if (!author || !text) return;
-
-        const posts = getForumPosts();
-        const post = posts.find(p => p.id === id);
-        if (post) {
-          if (!post.replies) post.replies = [];
-          post.replies.push({ author, text });
-          localStorage.setItem('budz_emporium_forum_posts', JSON.stringify(posts));
-          renderForumFeed();
         }
       }
 
@@ -1155,7 +933,6 @@
       // Initial Render
       document.addEventListener('DOMContentLoaded', () => {
         initAgeGate();
-        renderForumFeed();
         initHeroParallax();
       });
 
