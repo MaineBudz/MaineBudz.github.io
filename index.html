@@ -1164,168 +1164,6 @@
         }
       }
 
-      // 3. Interactive Forum Logic with LocalStorage
-      const initialPosts = [
-        {
-          id: 1,
-          author: 'BudzCaresTeam',
-          category: 'turkey',
-          title: '2026 Thanksgiving Turkey Program Applications are Open!',
-          content: 'Applications for our free Thanksgiving turkey drive close November 1st, with pickup scheduled for Friday, November 20th at Budz Emporium in Medway. Please spread the word to local families in need!',
-          date: 'Nov 1, 2026',
-          replies: [
-            { author: 'MedwayNeighbor', text: 'Thank you for doing this every year!' }
-          ]
-        },
-        {
-          id: 2,
-          author: 'GreenThumb207',
-          category: 'growing',
-          title: 'Tips for winter indoor live plant lighting in Maine?',
-          content: 'Anyone picking up live plant starts from Budz this season? What spectrum LED grow light setups are working best for your winter tents?',
-          date: 'Nov 2, 2026',
-          replies: []
-        }
-      ];
-
-      function getForumPosts() {
-        const data = localStorage.getItem('budz_emporium_forum_posts');
-        if (!data) {
-          localStorage.setItem('budz_emporium_forum_posts', JSON.stringify(initialPosts));
-          return initialPosts;
-        }
-        try {
-          return JSON.parse(data);
-        } catch(e) {
-          return initialPosts;
-        }
-      }
-
-      let currentCategory = 'all';
-
-      function renderForumFeed() {
-        const feed = document.getElementById('forum-feed');
-        const posts = getForumPosts();
-        feed.innerHTML = '';
-
-        const filtered = currentCategory === 'all' 
-          ? posts 
-          : posts.filter(p => p.category === currentCategory);
-
-        if (filtered.length === 0) {
-          feed.innerHTML = '<div class="text-center py-8 text-budz-muted text-sm">No topics in this category yet. Be the first to start a conversation!</div>';
-          return;
-        }
-
-        const catNames = {
-          turkey: 'Turkey Drive',
-          growing: 'Growing & Plants',
-          bistro: 'Café & Bistro',
-          general: 'General'
-        };
-
-        filtered.forEach(post => {
-          const card = document.createElement('div');
-          card.className = 'p-5 rounded-2xl bg-budz-paper border border-budz-line space-y-3';
-          
-          let repliesMarkup = '';
-          if (post.replies && post.replies.length > 0) {
-            repliesMarkup = '<div class="mt-3 pt-3 border-t border-budz-line space-y-2">';
-            post.replies.forEach(r => {
-              repliesMarkup += `<div class="p-2.5 rounded-lg bg-white/70 text-xs text-budz-ink"><strong class="text-budz-green">${r.author}:</strong> ${r.text}</div>`;
-            });
-            repliesMarkup += '</div>';
-          }
-
-          card.innerHTML = `
-            <div class="flex justify-between items-center text-xs">
-              <span class="px-2.5 py-1 rounded-full font-bold bg-emerald-100 text-budz-green uppercase">${catNames[post.category] || 'General'}</span>
-              <span class="text-budz-muted">Posted by <strong>${post.author}</strong> &bull; ${post.date}</span>
-            </div>
-            <h4 class="text-base font-bold text-budz-greenDeep">${post.title}</h4>
-            <p class="text-xs text-budz-muted leading-relaxed">${post.content}</p>
-            ${repliesMarkup}
-            <div class="pt-2">
-              <button onclick="toggleReplyBox(${post.id})" class="text-xs font-bold text-budz-green hover:underline">💬 Reply (${post.replies ? post.replies.length : 0})</button>
-            </div>
-            <div id="reply-box-${post.id}" class="hidden pt-3 border-t border-budz-line space-y-2">
-              <input type="text" id="reply-author-${post.id}" placeholder="Your Name" class="w-full px-3 py-1.5 text-xs rounded-lg bg-white border border-budz-line">
-              <textarea id="reply-text-${post.id}" rows="2" placeholder="Write your reply..." class="w-full px-3 py-1.5 text-xs rounded-lg bg-white border border-budz-line"></textarea>
-              <button onclick="submitReply(${post.id})" class="px-4 py-1.5 rounded-lg font-bold text-xs uppercase text-white bg-budz-green hover:bg-budz-greenLight">Submit Reply</button>
-            </div>
-          `;
-          feed.appendChild(card);
-        });
-      }
-
-      function filterForum(cat, selectedButton) {
-        currentCategory = cat;
-        document.querySelectorAll('.forum-filter-btn').forEach(btn => {
-          btn.classList.remove('bg-budz-green', 'text-white');
-          btn.classList.add('bg-budz-paper', 'text-budz-muted');
-        });
-        const activeButton = selectedButton || document.querySelector(`.forum-filter-btn[onclick*="'${cat}'"]`);
-        if (activeButton) {
-          activeButton.classList.add('bg-budz-green', 'text-white');
-          activeButton.classList.remove('bg-budz-paper', 'text-budz-muted');
-        }
-        renderForumFeed();
-      }
-
-      function toggleNewPostForm() {
-        const box = document.getElementById('new-post-box');
-        box.classList.toggle('hidden');
-      }
-
-      function handleNewPost(e) {
-        e.preventDefault();
-        const author = document.getElementById('post-author').value.trim();
-        const category = document.getElementById('post-category').value;
-        const title = document.getElementById('post-title').value.trim();
-        const content = document.getElementById('post-content').value.trim();
-
-        if (!author || !title || !content) return;
-
-        const posts = getForumPosts();
-        posts.unshift({
-          id: Date.now(),
-          author,
-          category,
-          title,
-          content,
-          date: 'Just now',
-          replies: []
-        });
-
-        localStorage.setItem('budz_emporium_forum_posts', JSON.stringify(posts));
-        document.getElementById('forum-form').reset();
-        toggleNewPostForm();
-        renderForumFeed();
-      }
-
-      function toggleReplyBox(id) {
-        const box = document.getElementById(`reply-box-${id}`);
-        if (box) box.classList.toggle('hidden');
-      }
-
-      function submitReply(id) {
-        const authorInput = document.getElementById(`reply-author-${id}`);
-        const textInput = document.getElementById(`reply-text-${id}`);
-        const author = authorInput.value.trim();
-        const text = textInput.value.trim();
-
-        if (!author || !text) return;
-
-        const posts = getForumPosts();
-        const post = posts.find(p => p.id === id);
-        if (post) {
-          if (!post.replies) post.replies = [];
-          post.replies.push({ author, text });
-          localStorage.setItem('budz_emporium_forum_posts', JSON.stringify(posts));
-          renderForumFeed();
-        }
-      }
-
       function submitTurkeyApplication(e) {
         e.preventDefault();
         const form = e.target;
@@ -1407,7 +1245,6 @@
       // Initial Render
       document.addEventListener('DOMContentLoaded', () => {
         initAgeGate();
-        renderForumFeed();
         initHeroParallax();
       });
 
@@ -1530,7 +1367,6 @@
 
       // Initial Render
       document.addEventListener('DOMContentLoaded', () => {
-        renderForumFeed();
         initHeroParallax();
         initCardGlow();
       });
