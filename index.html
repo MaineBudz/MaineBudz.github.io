@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budz Emporium | Value-Priced Cannabis, Caf&eacute; &amp; Community | Medway, ME</title>
+    <meta name="description" content="Budz Emporium is Medway, Maine's value-first adult-use cannabis dispensary, café & bistro, and home of the Budz Cares Foundation. Pre-rolls from $3.50, ounces from $87.50. Open 7 AM–7 PM, 365 days a year.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              budz: {
+                paper: '#eaddbf',
+                paperDark: '#ece5d6',
+                surface: '#eaddbf',
+                green: '#254e2a',
+                greenLight: '#346b3b',
+                greenDeep: '#16331a',
+                greenDarkest: '#0e2412',
+                gold: '#b89243',
+                goldLight: '#d6ae5e',
+                ink: '#16331a',
+                muted: '#526154',
+                line: 'rgba(37, 78, 42, 0.12)'
+              }
+            },
+            fontFamily: {
+              sans: ['Open Sans', 'sans-serif'],
+              heading: ['Montserrat', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Smooth Scrolling & Universal Aesthetics */
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+      }
+      body {
+        background-color: #0e2412;
+        background-image:
+          radial-gradient(900px 520px at 10% -10%, rgba(37, 78, 42, 0.15), transparent 60%),
+          radial-gradient(700px 480px at 90% 10%, rgba(52, 107, 59, 0.12), transparent 60%);
+        color: #eaddbf;
+        font-family: 'Open Sans', sans-serif;
+        overflow-x: hidden;
+      }
+
+      .weed-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .weed-leaf {
+        position: absolute;
+        width: clamp(110px, 15vw, 220px);
+        filter: drop-shadow(0 12px 20px rgba(5, 15, 7, 0.35));
+        opacity: 0.25;
+        transform-origin: center;
+      }
+      .weed-leaf--one {
+        top: 18%;
+        left: -2%;
+        transform: rotate(-24deg);
+      }
+      .weed-leaf--two {
+        right: -2%;
+        bottom: 15%;
+        transform: rotate(28deg) scale(0.82);
+      }
+      .weed-leaf--three {
+        top: 62%;
+        left: 9%;
+        transform: rotate(16deg) scale(0.46);
+        opacity: 0.2;
+      }
+      @keyframes weed-drift {
+        0%, 100% { translate: 0 0; }
+        50% { translate: 0 -10px; }
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        .weed-leaf--one { animation: weed-drift 12s ease-in-out infinite; }
+        .weed-leaf--two { animation: weed-drift 15s ease-in-out -5s infinite reverse; }
+        .weed-leaf--three { animation: weed-drift 11s ease-in-out -2s infinite; }
+      }
+      
+      /* White/light text on dark green background */
+      h1, h2, h3, h4, h5, h6,
+      .text-budz-greenDeep,
+      .text-budz-greenDarkest,
+      .text-budz-ink,
+      .text-budz-muted,
+      .text-emerald-50/90,
+      .text-emerald-100/80,
+      .text-emerald-100/70,
+      .text-white,
+      .section-title,
+      p,
+      span,
+      a,
+      label,
+      strong {
+        color: #eaddbf !important;
+      }
+      .text-budz-muted, .text-emerald-100/80, .text-emerald-100/70 {
+        color: #d6e0cf !important;
+      }
+      a {
+        text-decoration: none;
+      }
+      
+      /* Card Hover Lift & Border Glow - Mission & Promise style for all cards */
+      .budz-card {
+        background: linear-gradient(135deg, #16331a 0%, #254e2a 100%) !important;
+        color: #eaddbf !important;
+        border: none !important;
+        border-radius: 1rem;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 30px -10px rgba(14, 36, 18, 0.3);
+      }
+      .budz-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 24px 40px -12px rgba(14, 36, 18, 0.35), 0 0 60px rgba(52, 107, 59, 0.55), 0 0 0 1px rgba(251, 249, 244, 0.7);
+        background: linear-gradient(135deg, #1b3a21 0%, #346b3b 100%) !important;
+      }
+      
+      /* White text inside all cards */
+      .budz-card h1,
+      .budz-card h2,
+      .budz-card h3,
+      .budz-card h4,
+      .budz-card h5,
+      .budz-card h6,
+      .budz-card p,
+      .budz-card span,
+      .budz-card a,
+      .budz-card strong,
+      .budz-card label,
+      .budz-card em {
+        color: #eaddbf !important;
+      }
+      
+      /* Glowing edge rim (brand theme colors) */
+      .budz-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: 1rem;
+        padding: 1.5px;
+        background:
+          radial-gradient(
+            420px circle at 50% 50%,
+            #eaddbf 0%,
+            rgba(52, 107, 59, 0.75) 32%,
+            rgba(52, 107, 59, 0) 70%
+          ),
+          linear-gradient(135deg,
+            rgba(37, 78, 42, 0.75),
+            rgba(52, 107, 59, 0.55),
+            rgba(37, 78, 42, 0.75));
+        -webkit-mask: linear-gradient(#eaddbf 0 0) content-box, linear-gradient(#eaddbf 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0.65;
+        transition: opacity 240ms ease;
+      }
+      .budz-card:hover::before {
+        opacity: 1;
+      }
+      
+      /* Pointer-tracking glow rim */
+      .budz-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: 1rem;
+        padding: 1.5px;
+        background:
+          radial-gradient(
+            420px circle at var(--pointer-x) var(--pointer-y),
+            #eaddbf 0%,
+            rgba(52, 107, 59, 0.75) 32%,
+            rgba(52, 107, 59, 0) 70%
+          ),
+          linear-gradient(135deg,
+            rgba(37, 78, 42, 0.75),
+            rgba(52, 107, 59, 0.55),
+            rgba(37, 78, 42, 0.75));
+        -webkit-mask: linear-gradient(#eaddbf 0 0) content-box, linear-gradient(#eaddbf 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 240ms ease;
+        pointer-events: none;
+      }
+      .budz-card:hover::after {
+        opacity: 0.75;
+      }
+      
+      /* Accordion Custom Marker */
+      details summary::-webkit-details-marker {
+        display: none;
+      }
+      
+      /* SVG Icon Sizing Safeguards */
+      .icon-svg {
+        flex-shrink: 0;
+      }
+      
+      /* Glassmorphism Navigation */
+      .glass-nav {
+        background: rgba(14, 36, 18, 0.94);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .hero-background {
+        background-image: linear-gradient(180deg, #0e2412 0%, #16331a 48%, #346b3b 100%) !important;
+      }
+      .icon-svg {
+        color: #eaddbf !important;
+      }
+      .pay-panel button.bg-blue-600 {
+        background-color: #346b3b !important;
+      }
+      .pay-panel button.bg-blue-600:hover {
+        background-color: #4a7c43 !important;
+      }
+
+      /* Keep pill labels and header controls aligned with the green theme. */
+      .rounded-full {
+        color: #eaddbf !important;
+      }
+      .rounded-full.bg-emerald-100,
+      .rounded-full.bg-amber-100,
+      .rounded-full.bg-blue-100,
+      .rounded-full.bg-purple-100,
+      .rounded-full.bg-rose-100,
+      .rounded-full.bg-budz-gold {
+        background-color: #346b3b !important;
+      }
+      .rounded-full.bg-budz-gold:hover {
+        background-color: #4a7c43 !important;
+      }
+      .glass-nav,
+      .glass-nav a,
+      .glass-nav button {
+        color: #eaddbf !important;
+      }
+      .budz-card a.bg-budz-paper,
+      .budz-card button.bg-budz-paper {
+        color: #254e2a !important;
+      }
+      .budz-card .bg-budz-paper,
+      .budz-card .bg-budz-paper span,
+      .budz-card .bg-budz-paper strong,
+      .budz-card .bg-white,
+      .budz-card .bg-white::placeholder {
+        color: #16331a !important;
+      }
+      .budz-card .pay-tab.text-budz-muted {
+        color: #254e2a !important;
+      }
+      .bg-white {
+        background-color: #eaddbf !important;
+      }
+      .bg-white\/70 {
+        background-color: rgba(234, 221, 191, 0.7) !important;
+      }
+      .bg-white\/5 {
+        background-color: rgba(234, 221, 191, 0.05) !important;
+      }
+      .bg-white\/10 {
+        background-color: rgba(234, 221, 191, 0.1) !important;
+      }
+      .bg-white\/20 {
+        background-color: rgba(234, 221, 191, 0.2) !important;
+      }
+      .border-white\/10 {
+        border-color: rgba(234, 221, 191, 0.1) !important;
+      }
+      .border-white\/20 {
+        border-color: rgba(234, 221, 191, 0.2) !important;
+      }
+      .bg-budz-surface {
+        background-color: #eaddbf !important;
+      }
+      .text-budz-ink,
+      .bg-budz-paper,
+      .bg-budz-paper h1,
+      .bg-budz-paper h2,
+      .bg-budz-paper h3,
+      .bg-budz-paper h4,
+      .bg-budz-paper h5,
+      .bg-budz-paper h6,
+      .bg-budz-paper p,
+      .bg-budz-paper span,
+      .bg-budz-paper strong,
+      .bg-white,
+      .bg-white h1,
+      .bg-white h2,
+      .bg-white h3,
+      .bg-white h4,
+      .bg-white h5,
+      .bg-white h6,
+      .bg-white p,
+      .bg-white span,
+      .bg-white strong,
+      .bg-white label {
+        color: #16331a !important;
+      }
+      .bg-white::placeholder,
+      .bg-budz-paper::placeholder {
+        color: #16331a !important;
+      }
+      #community .budz-card a {
+        background-color: #346b3b !important;
+        border-color: #346b3b !important;
+        color: #eaddbf !important;
+      }
+      #community .budz-card a:hover {
+        background-color: #4a7c43 !important;
+        border-color: #4a7c43 !important;
+      }
+      #locations .budz-card ul.text-budz-ink,
+      #locations .budz-card ul.text-budz-ink div,
+      #locations .budz-card ul.text-budz-ink strong {
+        color: #eaddbf!important;
+      }
+      #locations .budz-card ul.text-budz-ink svg {
+        color: #9cc58a !important;
+      }
+      main h2,
+      main p {
+        color: #eaddbf !important;
+      }
+      .hero-brand-text {
+        color: #eaddbf !important;
+      }
+      .text-budz-muted,
+      .text-emerald-100\/70,
+      .text-emerald-100\/80 {
+        color: #eaddbf !important;
+      }
+      .text-budz-gold,
+      .text-budz-goldLight {
+        color: #9cc58a !important;
+      }
+      .bg-budz-gold {
+        background-color: #346b3b !important;
+      }
+      .bg-budz-gold\/10,
+      .bg-budz-gold\/20 {
+        background-color: rgba(52, 107, 59, 0.2) !important;
+      }
+      .hover\:bg-budz-goldLight:hover {
+        background-color: #4a7c43 !important;
+      }
+      .border-budz-gold\/40 {
+        border-color: rgba(52, 107, 59, 0.4) !important;
+      }
+      .border-budz-gold\/30 {
+        border-color: rgba(52, 107, 59, 0.3) !important;
+      }
+      .from-budz-goldLight {
+        --tw-gradient-from: #9cc58a var(--tw-gradient-from-position) !important;
+        --tw-gradient-to: rgb(156 197 138 / 0) var(--tw-gradient-to-position) !important;
+      }
+      .via-amber-200 {
+        --tw-gradient-via: #c7dfbd var(--tw-gradient-via-position) !important;
+      }
+
+      /* Parallax Forest Hero */
+      .parallax-container {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        place-items: center;
+      }
+      .hero-background {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .forest {
+        position: absolute;
+        inset: 0;
+        transform: translate3d(0, 0, 0);
+      }
+      .forest-img {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center bottom;
+        pointer-events: none;
+        user-select: none;
+        will-change: transform;
+        backface-visibility: hidden;
+        transform: translate3d(0, 0, 0);
+      }
+      .hero .forest-img {
+        opacity: var(--forest-opacity, 1);
+      }
+      @keyframes pine-drift {
+        from { translate: -6px 0; }
+        to { translate: 6px -4px; }
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        .hero .forest-img {
+          animation: pine-drift 12s ease-in-out infinite alternate;
+        }
+        .hero .forest-img:nth-child(2n) {
+          animation-duration: 15s;
+          animation-delay: -3s;
+        }
+        .hero .forest-img:nth-child(3n) {
+          animation-duration: 18s;
+          animation-delay: -7s;
+        }
+      }
+
+      /* Age verification gate */
+      .age-gate {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: grid;
+        place-items: center;
+        padding: 1.25rem;
+        background: rgba(14, 36, 18, 0.86);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+      .age-gate[hidden] {
+        display: none;
+      }
+      .age-gate-card {
+        width: min(100%, 30rem);
+        padding: clamp(2rem, 6vw, 3.25rem);
+        text-align: center;
+        background: linear-gradient(145deg, #16331a 0%, #254e2a 100%);
+        border: 1px solid rgba(214, 174, 94, 0.7);
+        border-radius: 1.25rem;
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45), 0 0 42px rgba(52, 107, 59, 0.35);
+      }
+      .age-gate-card h1 {
+        margin: 0 0 0.75rem;
+        color: #eaddbf;
+        font-family: 'Montserrat', sans-serif;
+        font-size: clamp(1.6rem, 5vw, 2.15rem);
+        font-weight: 800;
+        line-height: 1.15;
+      }
+      .age-gate-card p {
+        margin: 0 auto 1.75rem;
+        color: #eaddbf;
+        line-height: 1.6;
+      }
+      .age-gate-actions {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .age-gate-actions button {
+        min-width: 8rem;
+        padding: 0.8rem 1.25rem;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        font-weight: 700;
+        transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+      }
+      .age-gate-actions button:hover {
+        transform: translateY(-2px);
+      }
+      .age-gate-yes {
+        color: #16331a;
+        background: #d6ae5e;
+      }
+      .age-gate-yes:hover,
+      .age-gate-yes:focus-visible {
+        background: #e4c477;
+      }
+      .age-gate-no {
+        color: #eaddbf;
+        background: transparent;
+        border-color: rgba(234, 221, 191, 0.6) !important;
+      }
+      .age-gate-no:hover,
+      .age-gate-no:focus-visible {
+        background: rgba(234, 221, 191, 0.12);
+        border-color: #eaddbf !important;
+      }
+      @media (max-width: 420px) {
+        .age-gate-actions button {
+          width: 100%;
+        }
+      }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+    <div class="weed-backdrop" aria-hidden="true">
+        <img class="weed-leaf weed-leaf--one" src="weed-leaf-18569.png" alt="">
+        <img class="weed-leaf weed-leaf--two" src="weed-leaf-18569.png" alt="">
+        <img class="weed-leaf weed-leaf--three" src="weed-leaf-18569.png" alt="">
+    </div>
+
+    <!-- Age Verification -->
+    <div id="age-gate" class="age-gate" role="dialog" aria-modal="true" aria-labelledby="age-gate-title" aria-describedby="age-gate-description">
+        <div class="age-gate-card">
+            <h1 id="age-gate-title">Are you 21 or older?</h1>
+            <p id="age-gate-description">You must be at least 21 years old to enter Budz Emporium.</p>
+            <div class="age-gate-actions">
+                <button type="button" class="age-gate-yes" id="age-gate-yes">Yes, enter site</button>
+                <button type="button" class="age-gate-no" id="age-gate-no">No, exit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-budz-gold focus:text-budz-greenDarkest">Skip to main content</a>
+
+    <!-- Sticky Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo Brand -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="bg-budz-surface p-2 rounded-xl shadow-md group-hover:scale-105 transition-transform">
+                    <img src="budz-emporium-wordmark-transparent_d0773694.png" alt="Budz Emporium Logo" class="h-8 w-auto min-w-[100px] object-contain">
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+                <a href="#home" class="px-3 py-2 text-sm font-semibold text-white/90 hover:text-budz-goldLight transition-colors">Home</a>
+                <a href="#about" class="px-3 py-2 text-sm font-semibold text-white/90 hover:text-budz-goldLight transition-colors">About</a>
+                <a href="#specials" class="px-3 py-2 text-sm font-semibold text-white/90 hover:text-budz-goldLight transition-colors">Specials</a>
+                <a href="#community" class="px-3 py-2 text-sm font-semibold text-white/90 hover:text-budz-goldLight transition-colors">Budz Cares</a>
+                <a href="#forum" class="px-3 py-2 text-sm font-semibold text-white/90 hover:text-budz-goldLight transition-colors">Forum</a>
+                <a href="#products" class="px-3 py-2 text-sm font-semibold text-white/90 hover:text-budz-goldLight transition-colors">Products</a>
+                <a href="#locations" class="px-3 py-2 text-sm font-semibold text-white/90 hover:text-budz-goldLight transition-colors">Locations</a>
+                <a href="#contact" class="px-3 py-2 text-sm font-semibold text-white/90 hover:text-budz-goldLight transition-colors">Contact</a>
+            </nav>
+
+            <!-- CTA & Mobile Menu Toggle -->
+            <div class="flex items-center gap-3">
+                <a href="#community" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider text-budz-greenDarkest bg-budz-gold hover:bg-budz-goldLight transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
+                    Donate Now
+                </a>
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg text-white hover:bg-white/10 transition-colors focus:outline-none" aria-label="Toggle Navigation">
+                    <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-white/10 bg-budz-greenDeep/95 backdrop-blur-xl px-4 pt-3 pb-6 space-y-2 shadow-2xl">
+            <a href="#home" class="mobile-link block px-4 py-2.5 rounded-lg text-base font-medium text-white hover:bg-white/10">Home</a>
+            <a href="#about" class="mobile-link block px-4 py-2.5 rounded-lg text-base font-medium text-white hover:bg-white/10">About Us</a>
+            <a href="#specials" class="mobile-link block px-4 py-2.5 rounded-lg text-base font-medium text-white hover:bg-white/10">Specials &amp; Deals</a>
+            <a href="#community" class="mobile-link block px-4 py-2.5 rounded-lg text-base font-medium text-white hover:bg-white/10">Budz Cares Foundation</a>
+            <a href="#forum" class="mobile-link block px-4 py-2.5 rounded-lg text-base font-medium text-white hover:bg-white/10">Community Forum</a>
+            <a href="#products" class="mobile-link block px-4 py-2.5 rounded-lg text-base font-medium text-white hover:bg-white/10">Products</a>
+            <a href="#locations" class="mobile-link block px-4 py-2.5 rounded-lg text-base font-medium text-white hover:bg-white/10">Locations &amp; Hours</a>
+            <a href="#contact" class="mobile-link block px-4 py-2.5 rounded-lg text-base font-medium text-white hover:bg-white/10">Contact Us</a>
+            <div class="pt-3">
+                <a href="#community" class="mobile-link block w-full text-center px-5 py-3 rounded-xl font-bold uppercase text-xs tracking-wider text-budz-greenDarkest bg-budz-gold hover:bg-budz-goldLight">
+                    Donate to Budz Cares
+                </a>
+            </div>
+        </div>
+        </header>
+
+    <!-- Main Content Container -->
+    <main id="main-content" class="flex-grow pt-0">
+
+        <!-- Hero Section -->
+        <section id="home" class="hero relative min-h-[75vh] flex flex-col items-center justify-center overflow-hidden text-white pb-12">
+            <div class="parallax-container relative w-full min-h-[75vh]">
+                <div class="hero-background absolute inset-0 z-0 bg-gradient-to-b from-budz-greenDarkest via-budz-greenDeep to-budz-green">
+                    <div class="forest absolute inset-0 transform translate3d(0,0,0)">
+                        <img src="assets/forest/forest-1.svg" class="forest-img w-full h-full object-cover object-bottom opacity-90" alt="" aria-hidden="true" data-depth="0.00">
+                        <img src="assets/forest/forest-2.svg" class="forest-img w-full h-full object-cover object-bottom opacity-85" alt="" aria-hidden="true" data-depth="0.11">
+                        <img src="assets/forest/forest-3.svg" class="forest-img w-full h-full object-cover object-bottom opacity-80" alt="" aria-hidden="true" data-depth="0.22">
+                        <img src="assets/forest/forest-4.svg" class="forest-img w-full h-full object-cover object-bottom opacity-75" alt="" aria-hidden="true" data-depth="0.33">
+                        <img src="assets/forest/forest-5.svg" class="forest-img w-full h-full object-cover object-bottom opacity-70" alt="" aria-hidden="true" data-depth="0.44">
+                        <img src="assets/forest/forest-6.svg" class="forest-img w-full h-full object-cover object-bottom opacity-65" alt="" aria-hidden="true" data-depth="0.55">
+                        <img src="assets/forest/forest-7.svg" class="forest-img w-full h-full object-cover object-bottom opacity-60" alt="" aria-hidden="true" data-depth="0.66">
+                        <img src="assets/forest/forest-8.svg" class="forest-img w-full h-full object-cover object-bottom opacity-55" alt="" aria-hidden="true" data-depth="0.77">
+                        <img src="assets/forest/forest-9.svg" class="forest-img w-full h-full object-cover object-bottom opacity-50" alt="" aria-hidden="true" data-depth="0.88">
+                        <img src="assets/forest/forest-10.svg" class="forest-img w-full h-full object-cover object-bottom opacity-45" alt="" aria-hidden="true" data-depth="1.00">
+                    </div>
+                    <!-- Readability scrim -->
+                    <div class="absolute inset-0 pointer-events-none" style="background:
+                        radial-gradient(120% 85% at 50% 42%, rgba(10, 26, 9, 0.08) 0%, rgba(10, 26, 9, 0.58) 70%, rgba(10, 26, 9, 0.85) 100%),
+                        linear-gradient(180deg, rgba(10, 26, 9, 0.60) 0%, rgba(10, 26, 9, 0.00) 34%, rgba(10, 26, 9, 0.74) 100%);"></div>
+                </div>
+
+                <div class="relative z-10 max-w-4xl mx-auto text-center space-y-6 px-4 sm:px-6 lg:px-8 py-10 mb-8" style="width: 100%; max-width: 900px;">
+                    <!-- Eyebrow Badge -->
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-budz-goldLight text-xs sm:text-sm font-semibold tracking-wide uppercase">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Medway, Maine &bull; Open 7 AM&ndash;7 PM &bull; 365 Days a Year
+                    </div>
+
+                    <!-- Hero Title & Subtitle -->
+                    <h1 class="hero-brand-text text-4xl sm:text-6xl lg:text-7xl font-extrabold font-heading tracking-tight leading-tight text-white">
+                        Good weed. Fair prices. <br class="hidden sm:inline">
+                        <span class="hero-brand-text text-white">Real community.</span>
+                    </h1>
+                    
+                    <p class="hero-brand-text text-lg sm:text-xl text-emerald-50/90 max-w-2xl mx-auto leading-relaxed font-normal">
+                        Medway’s value-first adult-use dispensary, cozy bistro, and non-profit foundation. Pre-rolls from $3.50, whole ounces from $87.50, and neighborly support across the Katahdin Region.
+                    </p>
+
+                    <!-- Hero CTAs -->
+                    <div class="flex flex-wrap justify-center items-center gap-4 pt-2">
+                        <a href="#specials" class="px-8 py-4 rounded-full font-heading font-bold text-sm uppercase tracking-wider text-budz-greenDarkest bg-budz-gold hover:bg-budz-goldLight shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all">
+                            See This Week's Deals
+                        </a>
+                        <a href="#community" class="hero-brand-text px-8 py-4 rounded-full font-heading font-bold text-sm uppercase tracking-wider text-white border-2 border-white/40 hover:border-white hover:bg-white/10 backdrop-blur-sm transition-all">
+                            Budz Cares Turkey Program
+                        </a>
+                    </div>
+
+                    <!-- Key Value Badges -->
+                    <div class="pt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-2xl mx-auto">
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+                            <div class="text-2xl font-bold font-heading text-budz-goldLight">$3.50</div>
+                            <div class="text-xs text-emerald-100/80 font-medium mt-0.5">Pre-Rolls Every Day</div>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+                            <div class="text-2xl font-bold font-heading text-budz-goldLight">$87.50</div>
+                            <div class="text-xs text-emerald-100/80 font-medium mt-0.5">Whole Ounces</div>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+                            <div class="text-2xl font-bold font-heading text-budz-goldLight">100% Local</div>
+                            <div class="text-xs text-emerald-100/80 font-medium mt-0.5">Katahdin Community First</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative overflow-hidden bg-[rgba(14,36,18,0.35)]">
+            <div class="absolute inset-0 bg-[radial-gradient(800px_500px_at_50%_0%,rgba(52,107,59,0.06),transparent)] pointer-events-none"></div>
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 class="text-3xl sm:text-4xl font-bold font-heading text-budz-greenDeep">About Budz Emporium</h2>
+                <div class="w-16 h-1 bg-budz-gold mx-auto rounded-full"></div>
+                <p class="text-budz-muted text-lg">Value you can trust, quality you can taste, and a warm welcome 365 days a year.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Mission Highlight Card -->
+                <div class="budz-card p-8 sm:p-10 bg-gradient-to-br from-budz-greenDeep to-budz-green text-white shadow-xl">
+                    <div class="w-14 h-14 rounded-2xl bg-budz-gold/20 flex items-center justify-center text-budz-goldLight mb-6 border border-budz-gold/30">
+                        <svg class="w-8 h-8 icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading mb-4 text-white">Our Mission &amp; Promise</h3>
+                    <p class="text-emerald-50/90 leading-relaxed mb-6">
+                        Budz Emporium was built to prove that top-shelf cannabis and everyday affordability belong together. Located right off I-95 exit 244 in Medway, Maine, we combine lab-verified cannabis products with warm community hospitality.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 border-t border-white/10 pt-6">
+                        <div>
+                            <div class="text-2xl font-bold font-heading text-budz-goldLight">365</div>
+                            <div class="text-xs text-emerald-100/70">Days Open a Year</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold font-heading text-budz-goldLight">1 Stop</div>
+                            <div class="text-xs text-emerald-100/70">Weed, Coffee &amp; Food</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Three Core Value Features -->
+                <div class="space-y-6">
+                    <div class="budz-card p-6 flex flex-row items-start gap-5">
+                        <div class="p-3 rounded-xl bg-budz-green/10 text-budz-green flex-shrink-0">
+                            <svg class="w-6 h-6 icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold font-heading text-budz-greenDeep mb-1">Premium Quality</h4>
+                            <p class="text-budz-muted text-sm leading-relaxed">Every batch is lab-tested and curated by experts who care about purity, potency, and terpene profiles.</p>
+                        </div>
+                    </div>
+
+                    <div class="budz-card p-6 flex flex-row items-start gap-5">
+                        <div class="p-3 rounded-xl bg-budz-green/10 text-budz-green flex-shrink-0">
+                            <svg class="w-6 h-6 icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold font-heading text-budz-greenDeep mb-1">Best Value Guarantee</h4>
+                            <p class="text-budz-muted text-sm leading-relaxed">Fair everyday pricing with zero gimmicks or high dispensaries markups—backed by our price pledge.</p>
+                        </div>
+                    </div>
+
+                    <div class="budz-card p-6 flex flex-row items-start gap-5">
+                        <div class="p-3 rounded-xl bg-budz-green/10 text-budz-green flex-shrink-0">
+                            <svg class="w-6 h-6 icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold font-heading text-budz-greenDeep mb-1">Community First</h4>
+                            <p class="text-budz-muted text-sm leading-relaxed">Home to the Budz Cares Foundation, providing holiday food security and direct relief for local families.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Specials Section -->
+        <section id="specials" class="py-20 px-4 sm:px-6 lg:px-8 border-y border-budz-line relative overflow-hidden bg-[rgba(14,36,18,0.35)]">
+            <div class="absolute inset-0 bg-[radial-gradient(700px_450px_at_80%_-20%,rgba(52,107,59,0.05),transparent)] pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <span class="text-xs font-bold font-heading uppercase tracking-widest text-budz-gold">Weekly &amp; Everyday Savings</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-heading text-budz-greenDeep">This Week at Budz</h2>
+                    <p class="text-budz-muted text-lg">Real savings, free weekend treats, and fair prices for every customer.</p>
+                </div>
+
+                <!-- 3 Evenly Spaced Specials Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Card 1: Weekend Perk -->
+                    <div class="budz-card p-8">
+                        <div class="mb-4">
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-budz-green">Every Weekend</span>
+                        </div>
+                        <h3 class="text-xl font-bold font-heading text-budz-greenDeep mb-3">Free Coffee &amp; Breakfast</h3>
+                        <p class="text-budz-muted text-sm mb-6 leading-relaxed flex-grow">Start your weekend right. Enjoy complimentary coffee and warm breakfast items every Saturday &amp; Sunday morning at Budz Bistro.</p>
+                        <div class="space-y-2 text-xs text-budz-ink bg-budz-paper p-4 rounded-xl border border-budz-line mb-6">
+                            <div class="flex justify-between"><span><strong>Days:</strong> Sat &amp; Sun</span> <span><strong>Time:</strong> 7–11 AM</span></div>
+                            <div class="flex justify-between"><span><strong>Where:</strong> Budz Bistro</span> <span><strong>Cost:</strong> Free</span></div>
+                        </div>
+                        <a href="#locations" class="w-full text-center py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-white bg-budz-green hover:bg-budz-greenLight transition-colors">Plan Your Visit</a>
+                    </div>
+
+                    <!-- Card 2: Weekly Rotating Deals -->
+                    <div class="budz-card p-8 border-budz-gold/40 shadow-md">
+                        <div class="mb-4">
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-800">Weekly Menu</span>
+                        </div>
+                        <h3 class="text-xl font-bold font-heading text-budz-greenDeep mb-3">Rotating Weekly Deals</h3>
+                        <p class="text-budz-muted text-sm mb-6 leading-relaxed flex-grow">We update our special featured menu weekly to keep quality cannabis accessible and fun for everyone.</p>
+                        <ul class="space-y-2 text-xs text-budz-muted mb-6">
+                            <li class="flex items-center gap-2"><span class="text-budz-gold font-bold">&check;</span> 10–20% off selected strain flower</li>
+                            <li class="flex items-center gap-2"><span class="text-budz-gold font-bold">&check;</span> Edible Buy 2 Get 1 specials</li>
+                            <li class="flex items-center gap-2"><span class="text-budz-gold font-bold">&check;</span> Multi-pack pre-roll bundles</li>
+                            <li class="flex items-center gap-2"><span class="text-budz-gold font-bold">&check;</span> Seasonal live plant promotions</li>
+                        </ul>
+                        <a href="#products" class="w-full text-center py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-budz-greenDarkest bg-budz-gold hover:bg-budz-goldLight transition-colors">Check Current Menu</a>
+                    </div>
+
+                    <!-- Card 3: Everyday Pricing -->
+                    <div class="budz-card p-8">
+                        <div class="mb-4">
+                            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-100 text-blue-800">Always On</span>
+                        </div>
+                        <h3 class="text-xl font-bold font-heading text-budz-greenDeep mb-3">Everyday Value Pricing</h3>
+                        <p class="text-budz-muted text-sm mb-6 leading-relaxed flex-grow">No membership cards needed. Enjoy reliable low pricing backed by our Best Value Guarantee every single day.</p>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between items-center p-2.5 rounded-lg bg-budz-paper border border-budz-line">
+                                <span class="text-sm font-semibold">Pre-Rolls</span>
+                                <span class="text-sm font-bold text-budz-green">From $3.50</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2.5 rounded-lg bg-budz-paper border border-budz-line">
+                                <span class="text-sm font-semibold">Whole Ounces</span>
+                                <span class="text-sm font-bold text-budz-green">$87.50</span>
+                            </div>
+                        </div>
+                        <a href="#products" class="w-full text-center py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-white bg-budz-green hover:bg-budz-greenLight transition-colors">Browse Products</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Budz Cares & Community Section -->
+        <section id="community" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative overflow-hidden bg-[rgba(14,36,18,0.35)]">
+            <div class="absolute inset-0 bg-[radial-gradient(700px_450px_at_20%_100%,rgba(52,107,59,0.05),transparent)] pointer-events-none"></div>
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-xs font-bold font-heading uppercase tracking-widest text-budz-gold">Giving Back to Katahdin</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-heading text-budz-greenDeep">Budz Cares Foundation</h2>
+                <p class="text-budz-muted text-lg">Neighbor-powered help, community turkey drives, and confidential hardship relief.</p>
+            </div>
+
+            <!-- Balanced Grid for 5 Community Initiatives -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- 1. Thanksgiving Turkey Program (Featured Card) -->
+                <div class="budz-card p-8 lg:col-span-2 bg-gradient-to-br from-budz-greenDeep to-budz-green text-white shadow-xl relative overflow-hidden">
+                    <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-budz-gold/10 rounded-full blur-2xl"></div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-budz-gold text-budz-greenDarkest mb-4 self-start">Featured Initiative</span>
+                    <h3 class="text-2xl font-bold font-heading mb-3 text-white">Katahdin Thanksgiving Turkey Program</h3>
+                    <p class="text-emerald-50/90 text-sm leading-relaxed mb-6">A holiday table with room for everyone. Each year, Budz Cares provides free Thanksgiving turkeys to local families needing assistance across Medway and surrounding towns.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 bg-white/10 p-4 rounded-xl backdrop-blur-md text-xs">
+                        <div><strong>Pickup Date:</strong> Friday, Nov 20, 2026</div>
+                        <div><strong>Location:</strong> Budz Emporium</div>
+                        <div><strong>Process:</strong> 100% Confidential</div>
+                    </div>
+                    <div class="mt-auto pt-4">
+                        <a href="#turkey-application" class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-heading font-bold text-xs uppercase tracking-wider text-budz-greenDarkest bg-budz-gold hover:bg-budz-goldLight transition-colors">
+                            Apply or Learn More
+                            <svg class="w-4 h-4 icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. Donation Card with Multi-Payment Tabs -->
+                <div class="budz-card p-8 border-2 border-budz-gold/60 shadow-lg">
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-800 mb-4 self-start">Support The Work</span>
+                    <h3 class="text-xl font-bold font-heading text-budz-greenDeep mb-3">Donate to Budz Cares</h3>
+                    <p class="text-budz-muted text-xs mb-4">Every dollar powers emergency food boxes and direct local aid.</p>
+                    
+                    <!-- Tab Selector Buttons -->
+                    <div class="flex rounded-lg bg-budz-paper p-1 border border-budz-line mb-4">
+                        <button onclick="switchPayTab('paypal')" id="tab-paypal" class="pay-tab flex-1 py-1.5 text-xs font-bold rounded-md bg-budz-green text-white transition-all">PayPal</button>
+                        <button onclick="switchPayTab('card')" id="tab-card" class="pay-tab flex-1 py-1.5 text-xs font-bold rounded-md text-budz-muted hover:text-budz-green transition-all">Card</button>
+                        <button onclick="switchPayTab('mail')" id="tab-mail" class="pay-tab flex-1 py-1.5 text-xs font-bold rounded-md text-budz-muted hover:text-budz-green transition-all">Mail/In-Person</button>
+                    </div>
+
+                    <!-- PayPal Panel -->
+                    <div id="panel-paypal" class="pay-panel space-y-3">
+                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                            <input type="hidden" name="cmd" value="_donations">
+                            <input type="hidden" name="business" value="BudzCares@gmail.com">
+                            <input type="hidden" name="item_name" value="Budz Cares Foundation Support">
+                            <input type="hidden" name="currency_code" value="USD">
+                            <div class="flex gap-2 mb-3">
+                                <span class="px-3 py-2 bg-budz-paper border border-budz-line rounded-lg font-bold text-sm text-budz-green">$</span>
+                                <input type="number" name="amount" placeholder="Custom Amount" min="1" required class="w-full px-3 py-2 bg-white border border-budz-line rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-budz-gold">
+                            </div>
+                            <button type="submit" class="w-full py-2.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-white bg-blue-600 hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
+                                Donate via PayPal / Venmo
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Card Panel -->
+                    <div id="panel-card" class="pay-panel hidden space-y-3">
+                        <p class="text-xs text-budz-muted leading-relaxed">Secure credit or debit card donation processed via PayPal checkout without requiring an account.</p>
+                        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=BudzCares@gmail.com&item_name=Budz+Cares+Card+Donation&currency_code=USD" target="_blank" rel="noopener" class="w-full py-2.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-white bg-emerald-600 hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2">
+                            Pay with Debit / Credit Card
+                        </a>
+                    </div>
+
+                    <!-- Mail / In-Person Panel -->
+                    <div id="panel-mail" class="pay-panel hidden space-y-2 text-xs text-budz-muted bg-budz-paper p-3 rounded-lg border border-budz-line">
+                        <p><strong>In-Person:</strong> Drop off cash or check at the Budz Emporium counter.</p>
+                        <p><strong>By Mail:</strong> Send checks payable to <em>Budz Cares Foundation</em> at 1995 Medway Rd, Medway, ME 04460.</p>
+                    </div>
+                </div>
+
+                <!-- 3. Direct Neighbor Assistance -->
+                <div class="budz-card p-8">
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-budz-green mb-4 self-start">Direct Relief</span>
+                    <h3 class="text-xl font-bold font-heading text-budz-greenDeep mb-3">Direct Neighbor Support</h3>
+                    <p class="text-budz-muted text-sm mb-6 leading-relaxed flex-grow">"Help should feel like a neighbor at the door." We assist local families undergoing unexpected hardship or emergency financial strain.</p>
+                    <a href="mailto:BudzCares@gmail.com" class="w-full text-center py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-budz-green border border-budz-green/40 hover:bg-budz-green hover:text-white transition-colors mt-auto">Contact Foundation Team</a>
+                </div>
+
+                <!-- 4. Volunteer Drives & Projects -->
+                <div class="budz-card p-8">
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-budz-green mb-4 self-start">Community Action</span>
+                    <h3 class="text-xl font-bold font-heading text-budz-greenDeep mb-3">Volunteer &amp; Cleanups</h3>
+                    <p class="text-budz-muted text-sm mb-6 leading-relaxed flex-grow">From Penobscot shoreline cleanups to community gardens, we coordinate hands-on volunteer days to keep Maine beautiful.</p>
+                    <a href="mailto:BudzCares@gmail.com" class="w-full text-center py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-budz-green border border-budz-green/40 hover:bg-budz-green hover:text-white transition-colors mt-auto">Join Volunteer List</a>
+                </div>
+
+                <!-- 5. Budz Café & Bistro Hub -->
+                <div class="budz-card p-8">
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-800 mb-4 self-start">In-House Hub</span>
+                    <h3 class="text-xl font-bold font-heading text-budz-greenDeep mb-3">Budz Caf&eacute; &amp; Bistro</h3>
+                    <p class="text-budz-muted text-sm mb-6 leading-relaxed flex-grow">Hand-crafted espresso drinks, fresh bakery items, breakfast sandwiches, and our signature Budz Boosts featuring 50+ Red Bull flavors.</p>
+                    <a href="https://www.facebook.com/Budzbistro/" target="_blank" rel="noopener" class="w-full text-center py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-budz-green border border-budz-green/40 hover:bg-budz-green hover:text-white transition-colors mt-auto">View Bistro Menu</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Community Forum Section -->
+        <section id="forum" class="py-20 px-4 sm:px-6 lg:px-8 border-y border-budz-line relative overflow-hidden bg-[rgba(14,36,18,0.35)]">
+            <div class="absolute inset-0 bg-[radial-gradient(700px_450px_at_80%_100%,rgba(52,107,59,0.05),transparent)] pointer-events-none"></div>
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                    <span class="text-xs font-bold font-heading uppercase tracking-widest text-budz-gold">Connect &amp; Discuss</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-heading text-budz-greenDeep">Community Forum</h2>
+                    <p class="text-budz-muted text-lg">Share grow advice, recommend bistro specials, or ask questions about foundation projects.</p>
+                </div>
+
+                <!-- Thanksgiving 2026 Community Support -->
+                <article id="turkey-application" class="budz-card p-6 sm:p-8 mb-8">
+                  <div class="max-w-3xl">
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-budz-green text-white mb-4">Thanksgiving 2026 / Community Support</span>
+                    <h3 class="text-2xl sm:text-3xl font-bold font-heading mb-3 text-white">A table with room for everyone</h3>
+                    <h4 class="text-xl font-bold font-heading mb-3 text-white">Need a turkey for Thanksgiving?</h4>
+                    <p class="text-sm leading-relaxed mb-4">We invite everyone in the Katahdin region who needs a turkey to apply. Share a few details below so the Budz Cares team can review your application.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5 text-sm">
+                      <div class="p-3 rounded-lg bg-white/10"><strong>Limited turkeys available</strong><br>Apply soon.</div>
+                      <div class="p-3 rounded-lg bg-white/10"><strong>Applications close</strong><br>November 1, 2026</div>
+                      <div class="p-3 rounded-lg bg-white/10"><strong>Pickup</strong><br>Friday, November 20, 2026</div>
+                    </div>
+                    <p class="text-sm leading-relaxed mb-6">If you are selected, pickup will be at Budz Emporium in Medway. Selected applicants will be contacted by email or phone. Submitting an application does not guarantee selection.</p>
+                  </div>
+
+                  <div class="border-t border-white/20 pt-6">
+                    <h4 class="text-xl font-bold font-heading mb-4 text-white">Apply for a free turkey</h4>
+                    <form id="turkey-application-form" onsubmit="submitTurkeyApplication(event)" class="space-y-4">
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label for="turkey-name" class="block text-xs font-bold mb-1">Name *</label>
+                          <input id="turkey-name" name="Name" type="text" required class="w-full px-3.5 py-2 rounded-xl bg-white text-budz-ink border border-budz-line text-sm" autocomplete="name">
+                        </div>
+                        <div>
+                          <label for="turkey-email" class="block text-xs font-bold mb-1">Email *</label>
+                          <input id="turkey-email" name="Email" type="email" required class="w-full px-3.5 py-2 rounded-xl bg-white text-budz-ink border border-budz-line text-sm" autocomplete="email">
+                        </div>
+                        <div>
+                          <label for="turkey-phone" class="block text-xs font-bold mb-1">Phone *</label>
+                          <input id="turkey-phone" name="Phone" type="tel" required class="w-full px-3.5 py-2 rounded-xl bg-white text-budz-ink border border-budz-line text-sm" autocomplete="tel">
+                        </div>
+                        <div>
+                          <label for="turkey-town" class="block text-xs font-bold mb-1">Town *</label>
+                          <input id="turkey-town" name="Town" type="text" required class="w-full px-3.5 py-2 rounded-xl bg-white text-budz-ink border border-budz-line text-sm" autocomplete="address-level2">
+                        </div>
+                        <div>
+                          <label for="turkey-household" class="block text-xs font-bold mb-1">How many people will share Thanksgiving dinner with you? *</label>
+                          <input id="turkey-household" name="Household size" type="number" min="1" required class="w-full px-3.5 py-2 rounded-xl bg-white text-budz-ink border border-budz-line text-sm">
+                        </div>
+                        <div>
+                          <label for="turkey-income" class="block text-xs font-bold mb-1">Monthly household income *</label>
+                          <div class="flex">
+                            <span class="px-3 py-2 bg-white border border-r-0 border-budz-line rounded-l-xl text-budz-ink font-bold">$</span>
+                            <input id="turkey-income" name="Monthly household income" type="number" min="0" required class="w-full px-3.5 py-2 rounded-r-xl bg-white text-budz-ink border border-budz-line text-sm">
+                          </div>
+                        </div>
+                      </div>
+                      <fieldset>
+                        <legend class="block text-xs font-bold mb-2">Are you part of the Budz community? *</legend>
+                        <div class="flex gap-5 text-sm">
+                          <label class="inline-flex items-center gap-2"><input type="radio" name="Budz community member" value="Yes" required> Yes</label>
+                          <label class="inline-flex items-center gap-2"><input type="radio" name="Budz community member" value="No"> No</label>
+                        </div>
+                      </fieldset>
+                      <div>
+                        <label for="turkey-website" class="block text-xs font-bold mb-1">Website</label>
+                        <input id="turkey-website" name="Website" type="url" placeholder="Optional" class="w-full px-3.5 py-2 rounded-xl bg-white text-budz-ink border border-budz-line text-sm">
+                      </div>
+                      <p class="text-xs">Your information is private and used only to review applications and contact selected recipients.</p>
+                      <button type="submit" class="px-6 py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-white bg-budz-green hover:bg-budz-greenLight">Submit application</button>
+                      <p id="turkey-application-status" class="hidden text-sm" role="status"></p>
+                    </form>
+                  </div>
+                </article>
+
+                <!-- Forum Wrapper -->
+                <div class="budz-card p-6 sm:p-8 bg-budz-surface shadow-xl">
+                    <!-- Controls Bar -->
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-6 border-b border-budz-line">
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="filterForum('all', this)" class="forum-filter-btn active px-3.5 py-1.5 rounded-full text-xs font-bold bg-budz-green text-white">All Topics</button>
+                            <button onclick="filterForum('turkey', this)" class="forum-filter-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-budz-paper text-budz-muted hover:bg-budz-green/10">Turkey Drive</button>
+                            <button onclick="filterForum('growing', this)" class="forum-filter-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-budz-paper text-budz-muted hover:bg-budz-green/10">Growing &amp; Plants</button>
+                            <button onclick="filterForum('bistro', this)" class="forum-filter-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-budz-paper text-budz-muted hover:bg-budz-green/10">Caf&eacute; &amp; Bistro</button>
+                        </div>
+                        <button onclick="toggleNewPostForm()" class="px-5 py-2.5 rounded-full font-heading font-bold text-xs uppercase tracking-wider text-budz-greenDarkest bg-budz-gold hover:bg-budz-goldLight transition-colors">
+                            Start New Discussion
+                        </button>
+                    </div>
+
+                    <!-- New Discussion Form Modal/Container -->
+                    <div id="new-post-box" class="hidden mb-8 p-6 bg-budz-paper rounded-2xl border border-budz-line">
+                        <h3 class="text-lg font-bold font-heading text-budz-greenDeep mb-4">Post a Topic to the Community</h3>
+                        <form id="forum-form" onsubmit="handleNewPost(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-budz-greenDeep mb-1">Your Name / Alias *</label>
+                                    <input type="text" id="post-author" required placeholder="e.g. MedwayGardener" class="w-full px-3.5 py-2 rounded-xl bg-white border border-budz-line text-sm focus:outline-none focus:ring-2 focus:ring-budz-gold">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-budz-greenDeep mb-1">Category *</label>
+                                    <select id="post-category" required class="w-full px-3.5 py-2 rounded-xl bg-white border border-budz-line text-sm focus:outline-none focus:ring-2 focus:ring-budz-gold">
+                                        <option value="turkey">Turkey Drive &amp; Relief</option>
+                                        <option value="growing">Growing &amp; Plants</option>
+                                        <option value="bistro">Caf&eacute; &amp; Bistro</option>
+                                        <option value="general" selected>General Discussion</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-budz-greenDeep mb-1">Topic Title *</label>
+                                <input type="text" id="post-title" required placeholder="Summarize your question or story..." class="w-full px-3.5 py-2 rounded-xl bg-white border border-budz-line text-sm focus:outline-none focus:ring-2 focus:ring-budz-gold">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-budz-greenDeep mb-1">Message *</label>
+                                <textarea id="post-content" rows="3" required placeholder="Write your post here..." class="w-full px-3.5 py-2 rounded-xl bg-white border border-budz-line text-sm focus:outline-none focus:ring-2 focus:ring-budz-gold"></textarea>
+                            </div>
+                            <div class="flex gap-3">
+                                <button type="submit" class="px-5 py-2 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-white bg-budz-green hover:bg-budz-greenLight">Publish Discussion</button>
+                                <button type="button" onclick="toggleNewPostForm()" class="px-5 py-2 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-budz-muted bg-budz-paper">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Dynamic Post Feed -->
+                    <div id="forum-feed" class="space-y-4">
+                        <!-- Rendered dynamically by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative overflow-hidden bg-[rgba(14,36,18,0.35)]">
+            <div class="absolute inset-0 bg-[radial-gradient(700px_450px_at_10%_-20%,rgba(52,107,59,0.05),transparent)] pointer-events-none"></div>
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-xs font-bold font-heading uppercase tracking-widest text-budz-gold">Curated Cannabis Selection</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-heading text-budz-greenDeep">Our Product Categories</h2>
+                <p class="text-budz-muted text-lg">Tested for potency, flavor, and purity—crafted for every taste and budget.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1: Flower -->
+                <div class="budz-card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-budz-green">Best Seller</span>
+                        <span class="text-xs font-bold text-budz-gold">Flower &amp; Pre-Rolls</span>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading text-budz-greenDeep mb-2">Premium Flower &amp; Joints</h3>
+                    <p class="text-budz-muted text-sm mb-6 leading-relaxed flex-grow">Sativa, Indica, and Hybrid strains grown in Maine. Pre-rolls from $3.50 and full ounces from $87.50.</p>
+                    <a href="#contact" class="w-full text-center py-2.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-budz-green bg-budz-paper border border-budz-line hover:bg-budz-green hover:text-white transition-colors">Inquire Flower Menu</a>
+                </div>
+
+                <!-- Product 2: Edibles -->
+                <div class="budz-card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-800">Popular</span>
+                        <span class="text-xs font-bold text-budz-gold">Edibles</span>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading text-budz-greenDeep mb-2">Artisan Edibles &amp; Gummies</h3>
+                    <p class="text-budz-muted text-sm mb-6 leading-relaxed flex-grow">Gummies, chocolates, and baked goods precisely dosed for consistent, tasty enjoyment.</p>
+                    <a href="#contact" class="w-full text-center py-2.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-budz-green bg-budz-paper border border-budz-line hover:bg-budz-green hover:text-white transition-colors">Inquire Edible Menu</a>
+                </div>
+
+                <!-- Product 3: Concentrates -->
+                <div class="budz-card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-100 text-blue-800">High Potency</span>
+                        <span class="text-xs font-bold text-budz-gold">Concentrates</span>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading text-budz-greenDeep mb-2">Live Rosin &amp; Extracts</h3>
+                    <p class="text-budz-muted text-sm mb-6 leading-relaxed flex-grow">Top-shelf live rosin, wax, shatter, and terpene-rich extracts preserving peak plant flavor.</p>
+                    <a href="#contact" class="w-full text-center py-2.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-budz-green bg-budz-paper border border-budz-line hover:bg-budz-green hover:text-white transition-colors">Inquire Concentrates</a>
+                </div>
+
+                <!-- Product 4: Vapes -->
+                <div class="budz-card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-budz-green">Convenient</span>
+                        <span class="text-xs font-bold text-budz-gold">Vape Carts</span>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading text-budz-greenDeep mb-2">Vape Carts &amp; Disposable Pens</h3>
+                    <p class="text-budz-muted text-sm mb-6 leading-relaxed flex-grow">Pure strain distillate and full-spectrum oil cartridges compatible with 510-thread batteries.</p>
+                    <a href="#contact" class="w-full text-center py-2.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-budz-green bg-budz-paper border border-budz-line hover:bg-budz-green hover:text-white transition-colors">Inquire Vape Carts</a>
+                </div>
+
+                <!-- Product 5: Accessories -->
+                <div class="budz-card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-100 text-purple-800">Gear</span>
+                        <span class="text-xs font-bold text-budz-gold">Accessories</span>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading text-budz-greenDeep mb-2">Pipes, Grinders &amp; Papers</h3>
+                    <p class="text-budz-muted text-sm mb-6 leading-relaxed flex-grow">Affordable smoking accessories from $1 to $75. Everything you need for a smooth session.</p>
+                    <a href="#contact" class="w-full text-center py-2.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-budz-green bg-budz-paper border border-budz-line hover:bg-budz-green hover:text-white transition-colors">Shop Accessories</a>
+                </div>
+
+                <!-- Product 6: Infused Beverages -->
+                <div class="budz-card p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-100 text-rose-800">Refreshing</span>
+                        <span class="text-xs font-bold text-budz-gold">Drinks</span>
+                    </div>
+                    <h3 class="text-xl font-bold font-heading text-budz-greenDeep mb-2">Infused Sodas &amp; Beverages</h3>
+                    <p class="text-budz-muted text-sm mb-6 leading-relaxed flex-grow">Refreshing cannabis-infused beverages with fast onset times for a pleasant social buzz.</p>
+                    <a href="#contact" class="w-full text-center py-2.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-budz-green bg-budz-paper border border-budz-line hover:bg-budz-green hover:text-white transition-colors">Inquire Beverages</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Locations & Hours Section -->
+        <section id="locations" class="py-20 px-4 sm:px-6 lg:px-8 border-y border-budz-line relative overflow-hidden bg-[rgba(14,36,18,0.35)]">
+            <div class="absolute inset-0 bg-[radial-gradient(700px_450px_at_90%_0%,rgba(52,107,59,0.05),transparent)] pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <span class="text-xs font-bold font-heading uppercase tracking-widest text-budz-gold">Easy to Find Off I-95</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-heading text-budz-greenDeep">Visit Us in Medway, Maine</h2>
+                    <p class="text-budz-muted text-lg">Dispensary and Café under one roof. Open 7 AM–7 PM, 365 days a year.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <!-- Location 1: Dispensary -->
+                    <div class="budz-card p-8">
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-budz-green text-white mb-4 self-start">Cannabis Store</span>
+                        <h3 class="text-2xl font-bold font-heading text-budz-greenDeep mb-3">Budz Emporium</h3>
+                        <p class="text-budz-muted text-sm mb-6 leading-relaxed">Our full dispensary offering flower, edibles, concentrates, vapes, and seasonal live plants backed by our Best Value Guarantee.</p>
+                        
+                        <ul class="space-y-4 text-sm text-budz-ink mb-8 border-t border-b border-budz-line py-6">
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-budz-green icon-svg mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                <div><strong>Address:</strong> 1995 Medway Rd, Medway, ME 04460</div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-budz-green icon-svg mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h32a2 2 0 012 2v2a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18v8a2 2 0 01-2 2H5a2 2 0 01-2-2v-8z"/></svg>
+                                <div><strong>Hours:</strong> 7:00 AM &ndash; 7:00 PM (Everyday)</div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-budz-green icon-svg mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                                <div><strong>Phone / Text:</strong> <a href="tel:+12077231634" class="text-budz-green font-bold hover:underline">(207) 723-1634</a></div>
+                            </li>
+                        </ul>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="https://www.google.com/maps/dir/?api=1&amp;destination=1995+Medway+Rd+Medway+ME+04460" target="_blank" rel="noopener" class="flex-1 text-center py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-white bg-budz-green hover:bg-budz-greenLight transition-colors">Get Directions</a>
+                            <a href="tel:+12077231634" class="flex-1 text-center py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-budz-green border border-budz-green/40 hover:bg-budz-green hover:text-white transition-colors">Call Store</a>
+                        </div>
+                    </div>
+
+                    <!-- Location 2: Bistro -->
+                    <div class="budz-card p-8">
+                        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-budz-gold text-budz-greenDarkest mb-4 self-start">Caf&eacute; &amp; Bistro</span>
+                        <h3 class="text-2xl font-bold font-heading text-budz-greenDeep mb-3">Budz Caf&eacute; &amp; Bistro</h3>
+                        <p class="text-budz-muted text-sm mb-6 leading-relaxed">Coffee, warm breakfast sandwiches, espresso, cold brews, and Budz Boosts with over 50 flavors of Red Bull inside our shop.</p>
+                        
+                        <ul class="space-y-4 text-sm text-budz-ink mb-8 border-t border-b border-budz-line py-6">
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-budz-gold icon-svg mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                <div><strong>Weekend Perk:</strong> Free coffee &amp; breakfast (7–11 AM)</div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-budz-gold icon-svg mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                <div><strong>Bistro Hours:</strong> 7:00 AM &ndash; 7:00 PM (Everyday)</div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="w-5 h-5 text-budz-gold icon-svg mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+                                <div><strong>Inside Store:</strong> 1995 Medway Rd, Medway, ME</div>
+                            </li>
+                        </ul>
+
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="https://www.facebook.com/Budzbistro/" target="_blank" rel="noopener" class="flex-1 text-center py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-budz-greenDarkest bg-budz-gold hover:bg-budz-goldLight transition-colors">View Bistro Menu</a>
+                            <a href="#contact" class="flex-1 text-center py-3 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-budz-green border border-budz-green/40 hover:bg-budz-green hover:text-white transition-colors">Ask Questions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Accordion Section -->
+        <section id="faq" class="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto relative overflow-hidden bg-[rgba(14,36,18,0.35)]">
+            <div class="absolute inset-0 bg-[radial-gradient(600px_400px_at_50%_0%,rgba(52,107,59,0.05),transparent)] pointer-events-none"></div>
+            <div class="text-center max-w-2xl mx-auto mb-14 space-y-4">
+                <h2 class="text-3xl sm:text-4xl font-bold font-heading text-budz-greenDeep">Frequently Asked Questions</h2>
+                <p class="text-budz-muted">Everything you need to know before visiting Budz Emporium.</p>
+            </div>
+
+            <div class="space-y-4">
+                <details class="budz-card p-6 cursor-pointer group" open>
+                    <summary class="flex justify-between items-center text-lg font-bold font-heading text-budz-greenDeep">
+                        <span>How much does cannabis cost at Budz Emporium?</span>
+                        <span class="text-budz-gold group-open:rotate-180 transition-transform text-2xl font-normal">&darr;</span>
+                    </summary>
+                    <p class="mt-4 text-budz-muted text-sm leading-relaxed border-t border-budz-line pt-4">
+                        Pre-rolls start at <strong>$3.50</strong> and whole ounces are <strong>$87.50</strong>. Weekly specials offer 10–20% off selected flower strains, edible bundles, and pre-roll packs. All everyday pricing is backed by our Best Value Guarantee.
+                    </p>
+                </details>
+
+                <details class="budz-card p-6 cursor-pointer group">
+                    <summary class="flex justify-between items-center text-lg font-bold font-heading text-budz-greenDeep">
+                        <span>What are your store and bistro hours?</span>
+                        <span class="text-budz-gold group-open:rotate-180 transition-transform text-2xl font-normal">&darr;</span>
+                    </summary>
+                    <p class="mt-4 text-budz-muted text-sm leading-relaxed border-t border-budz-line pt-4">
+                        Budz Emporium and Budz Café &amp; Bistro are open <strong>7 AM to 7 PM every single day of the year</strong>—365 days a year with zero holiday closures!
+                    </p>
+                </details>
+
+                <details class="budz-card p-6 cursor-pointer group">
+                    <summary class="flex justify-between items-center text-lg font-bold font-heading text-budz-greenDeep">
+                        <span>Do you have food and coffee on site?</span>
+                        <span class="text-budz-gold group-open:rotate-180 transition-transform text-2xl font-normal">&darr;</span>
+                    </summary>
+                    <p class="mt-4 text-budz-muted text-sm leading-relaxed border-t border-budz-line pt-4">
+                        Yes! Budz Bistro operates right inside our Medway dispensary, featuring hand-crafted hot and iced coffees, espresso, breakfast items, and our popular Budz Boosts with 50+ Red Bull flavors.
+                    </p>
+                </details>
+
+                <details class="budz-card p-6 cursor-pointer group">
+                    <summary class="flex justify-between items-center text-lg font-bold font-heading text-budz-greenDeep">
+                        <span>How does Budz Cares Foundation support Maine families?</span>
+                        <span class="text-budz-gold group-open:rotate-180 transition-transform text-2xl font-normal">&darr;</span>
+                    </summary>
+                    <p class="mt-4 text-budz-muted text-sm leading-relaxed border-t border-budz-line pt-4">
+                        Budz Cares Foundation organizes our annual Thanksgiving Turkey Program for Katahdin region families, provides confidential emergency hardship assistance, and leads local volunteer cleanups.
+                    </p>
+                </details>
+
+                <details class="budz-card p-6 cursor-pointer group">
+                    <summary class="flex justify-between items-center text-lg font-bold font-heading text-budz-greenDeep">
+                        <span>Who can shop at Budz Emporium?</span>
+                        <span class="text-budz-gold group-open:rotate-180 transition-transform text-2xl font-normal">&darr;</span>
+                    </summary>
+                    <p class="mt-4 text-budz-muted text-sm leading-relaxed border-t border-budz-line pt-4">
+                        Our store is adult-use only. You must be <strong>21 years or older with a valid state or government-issued photo ID</strong>. Please consume responsibly.
+                    </p>
+                </details>
+            </div>
+        </section>
+
+        <!-- Contact & Location Map Section -->
+        <section id="contact" class="py-20 bg-gradient-to-b from-budz-greenDeep to-budz-greenDarkest text-white px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto space-y-16">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <span class="text-xs font-bold font-heading uppercase tracking-widest text-budz-goldLight">Get In Touch</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-heading text-white">Contact Our Team</h2>
+                    <p class="text-emerald-100/80 text-lg">Questions about products, bistro menu, or foundation projects? We're here to help.</p>
+                </div>
+
+                <!-- 2-Column Grid: Facts Left, Form Right -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    
+                    <!-- Left Column: Quick Contact Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-budz-goldLight mb-1">Dispensary Address</h4>
+                            <p class="text-sm text-emerald-50">1995 Medway Rd<br>Medway, ME 04460</p>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-budz-goldLight mb-1">Phone / Text</h4>
+                            <p class="text-sm text-emerald-50"><a href="tel:+12077231634" class="hover:underline">(207) 723-1634</a></p>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-budz-goldLight mb-1">Store &amp; Bistro Hours</h4>
+                            <p class="text-sm text-emerald-50">7:00 AM &ndash; 7:00 PM<br>365 Days a Year</p>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-budz-goldLight mb-1">Direct Email</h4>
+                            <p class="text-sm text-emerald-50"><a href="mailto:info@budzemporium.com" class="hover:underline">info@budzemporium.com</a></p>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Clean Form -->
+                    <div class="budz-card p-8 bg-budz-surface text-budz-ink shadow-2xl">
+                        <h3 class="text-xl font-bold font-heading text-budz-greenDeep mb-6">Send Us a Direct Message</h3>
+                        <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-budz-greenDeep mb-1">Full Name *</label>
+                                <input type="text" required class="w-full px-4 py-2.5 rounded-xl bg-budz-paper border border-budz-line text-sm focus:outline-none focus:ring-2 focus:ring-budz-gold">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-budz-greenDeep mb-1">Email Address *</label>
+                                    <input type="email" required class="w-full px-4 py-2.5 rounded-xl bg-budz-paper border border-budz-line text-sm focus:outline-none focus:ring-2 focus:ring-budz-gold">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-budz-greenDeep mb-1">Phone Number</label>
+                                    <input type="tel" class="w-full px-4 py-2.5 rounded-xl bg-budz-paper border border-budz-line text-sm focus:outline-none focus:ring-2 focus:ring-budz-gold">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-budz-greenDeep mb-1">Message *</label>
+                                <textarea rows="4" required class="w-full px-4 py-2.5 rounded-xl bg-budz-paper border border-budz-line text-sm focus:outline-none focus:ring-2 focus:ring-budz-gold"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-3.5 rounded-xl font-heading font-bold text-xs uppercase tracking-wider text-white bg-budz-green hover:bg-budz-greenLight transition-colors shadow-lg">
+                                Send Message
+                            </button>
+                            <p id="contact-status" class="hidden text-xs text-center p-3 rounded-lg bg-emerald-100 text-emerald-800 font-medium"></p>
+                        </form>
+                    </div>
+
+                </div>
+
+                <!-- Google Map Embed -->
+                <div class="rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
+                    <iframe src="https://maps.google.com/maps?q=1995%20Medway%20Rd%2C%20Medway%2C%20ME%2004460&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-budz-greenDarkest text-white border-t border-white/10 py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+            
+            <!-- Brand Info -->
+            <div class="space-y-4">
+                <div class="bg-budz-surface inline-block p-2 rounded-xl">
+                    <img src="budz-emporium-wordmark-transparent_d0773694.png" alt="Budz Emporium Logo" class="h-8 w-auto">
+                </div>
+                <p class="text-xs text-emerald-100/70 leading-relaxed">Value-priced cannabis dispensary, café bistro, and community foundation serving Medway and the Katahdin Region, Maine. Open 7 AM–7 PM, 365 days a year.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-budz-goldLight mb-4 font-heading">Quick Links</h4>
+                <ul class="space-y-2 text-xs text-emerald-100/80">
+                    <li><a href="#home" class="hover:text-budz-goldLight transition-colors">Home</a></li>
+                    <li><a href="#about" class="hover:text-budz-goldLight transition-colors">About Us</a></li>
+                    <li><a href="#specials" class="hover:text-budz-goldLight transition-colors">Specials &amp; Savings</a></li>
+                    <li><a href="#community" class="hover:text-budz-goldLight transition-colors">Budz Cares Foundation</a></li>
+                    <li><a href="#forum" class="hover:text-budz-goldLight transition-colors">Community Forum</a></li>
+                </ul>
+            </div>
+
+            <!-- Products -->
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-budz-goldLight mb-4 font-heading">Products</h4>
+                <ul class="space-y-2 text-xs text-emerald-100/80">
+                    <li><a href="#products" class="hover:text-budz-goldLight transition-colors">Flower &amp; Pre-Rolls</a></li>
+                    <li><a href="#products" class="hover:text-budz-goldLight transition-colors">Edibles &amp; Baked Goods</a></li>
+                    <li><a href="#products" class="hover:text-budz-goldLight transition-colors">Live Rosin &amp; Concentrates</a></li>
+                    <li><a href="#products" class="hover:text-budz-goldLight transition-colors">Vape Cartridges</a></li>
+                    <li><a href="#products" class="hover:text-budz-goldLight transition-colors">Accessories &amp; Glass</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact & Legal -->
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-budz-goldLight mb-4 font-heading">Visit Us</h4>
+                <p class="text-xs text-emerald-100/80 leading-relaxed mb-3">1995 Medway Rd, Medway, ME 04460<br>Call/Text: (207) 723-1634</p>
+                <div class="flex gap-3">
+                    <a href="https://www.facebook.com/Budz-Emporium-365132633349926/" target="_blank" rel="noopener" class="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white" aria-label="Facebook">
+                        <svg class="w-4 h-4 icon-svg" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto border-t border-white/10 mt-12 pt-8 text-center text-xs text-emerald-100/50 space-y-2">
+            <p>&copy; 2026 Budz Emporium &amp; Budz Cares Foundation. All rights reserved.</p>
+            <p>Adult-use cannabis sales restricted to individuals 21 years of age or older with valid ID. Please consume responsibly.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+      // 1. Mobile Menu Drawer Toggle
+      const mobileBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const iconOpen = document.getElementById('menu-icon-open');
+      const iconClose = document.getElementById('menu-icon-close');
+      const mobileLinks = document.querySelectorAll('.mobile-link');
+
+      function toggleMobileMenu() {
+        const isExpanded = mobileMenu.classList.contains('hidden');
+        if (isExpanded) {
+          mobileMenu.classList.remove('hidden');
+          iconOpen.classList.add('hidden');
+          iconClose.classList.remove('hidden');
+        } else {
+          mobileMenu.classList.add('hidden');
+          iconOpen.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        }
+      }
+
+      mobileBtn.addEventListener('click', toggleMobileMenu);
+      mobileLinks.forEach(link => link.addEventListener('click', () => {
+        if (!mobileMenu.classList.contains('hidden')) toggleMobileMenu();
+      }));
+
+      // 2. Donation Payment Tab Switcher
+      function switchPayTab(tabName) {
+        document.querySelectorAll('.pay-tab').forEach(btn => {
+          btn.classList.remove('bg-budz-green', 'text-white');
+          btn.classList.add('text-budz-muted');
+        });
+        document.querySelectorAll('.pay-panel').forEach(panel => panel.classList.add('hidden'));
+
+        const activeBtn = document.getElementById(`tab-${tabName}`);
+        const activePanel = document.getElementById(`panel-${tabName}`);
+
+        if (activeBtn && activePanel) {
+          activeBtn.classList.add('bg-budz-green', 'text-white');
+          activeBtn.classList.remove('text-budz-muted');
+          activePanel.classList.remove('hidden');
+        }
+      }
+
+      // 3. Interactive Forum Logic with LocalStorage
+      const initialPosts = [
+        {
+          id: 1,
+          author: 'BudzCaresTeam',
+          category: 'turkey',
+          title: '2026 Thanksgiving Turkey Program Applications are Open!',
+          content: 'Applications for our free Thanksgiving turkey drive close November 1st, with pickup scheduled for Friday, November 20th at Budz Emporium in Medway. Please spread the word to local families in need!',
+          date: 'Nov 1, 2026',
+          replies: [
+            { author: 'MedwayNeighbor', text: 'Thank you for doing this every year!' }
+          ]
+        },
+        {
+          id: 2,
+          author: 'GreenThumb207',
+          category: 'growing',
+          title: 'Tips for winter indoor live plant lighting in Maine?',
+          content: 'Anyone picking up live plant starts from Budz this season? What spectrum LED grow light setups are working best for your winter tents?',
+          date: 'Nov 2, 2026',
+          replies: []
+        }
+      ];
+
+      function getForumPosts() {
+        const data = localStorage.getItem('budz_emporium_forum_posts');
+        if (!data) {
+          localStorage.setItem('budz_emporium_forum_posts', JSON.stringify(initialPosts));
+          return initialPosts;
+        }
+        try {
+          return JSON.parse(data);
+        } catch(e) {
+          return initialPosts;
+        }
+      }
+
+      let currentCategory = 'all';
+
+      function renderForumFeed() {
+        const feed = document.getElementById('forum-feed');
+        const posts = getForumPosts();
+        feed.innerHTML = '';
+
+        const filtered = currentCategory === 'all' 
+          ? posts 
+          : posts.filter(p => p.category === currentCategory);
+
+        if (filtered.length === 0) {
+          feed.innerHTML = '<div class="text-center py-8 text-budz-muted text-sm">No topics in this category yet. Be the first to start a conversation!</div>';
+          return;
+        }
+
+        const catNames = {
+          turkey: 'Turkey Drive',
+          growing: 'Growing & Plants',
+          bistro: 'Café & Bistro',
+          general: 'General'
+        };
+
+        filtered.forEach(post => {
+          const card = document.createElement('div');
+          card.className = 'p-5 rounded-2xl bg-budz-paper border border-budz-line space-y-3';
+          
+          let repliesMarkup = '';
+          if (post.replies && post.replies.length > 0) {
+            repliesMarkup = '<div class="mt-3 pt-3 border-t border-budz-line space-y-2">';
+            post.replies.forEach(r => {
+              repliesMarkup += `<div class="p-2.5 rounded-lg bg-white/70 text-xs text-budz-ink"><strong class="text-budz-green">${r.author}:</strong> ${r.text}</div>`;
+            });
+            repliesMarkup += '</div>';
+          }
+
+          card.innerHTML = `
+            <div class="flex justify-between items-center text-xs">
+              <span class="px-2.5 py-1 rounded-full font-bold bg-emerald-100 text-budz-green uppercase">${catNames[post.category] || 'General'}</span>
+              <span class="text-budz-muted">Posted by <strong>${post.author}</strong> &bull; ${post.date}</span>
+            </div>
+            <h4 class="text-base font-bold text-budz-greenDeep">${post.title}</h4>
+            <p class="text-xs text-budz-muted leading-relaxed">${post.content}</p>
+            ${repliesMarkup}
+            <div class="pt-2">
+              <button onclick="toggleReplyBox(${post.id})" class="text-xs font-bold text-budz-green hover:underline">💬 Reply (${post.replies ? post.replies.length : 0})</button>
+            </div>
+            <div id="reply-box-${post.id}" class="hidden pt-3 border-t border-budz-line space-y-2">
+              <input type="text" id="reply-author-${post.id}" placeholder="Your Name" class="w-full px-3 py-1.5 text-xs rounded-lg bg-white border border-budz-line">
+              <textarea id="reply-text-${post.id}" rows="2" placeholder="Write your reply..." class="w-full px-3 py-1.5 text-xs rounded-lg bg-white border border-budz-line"></textarea>
+              <button onclick="submitReply(${post.id})" class="px-4 py-1.5 rounded-lg font-bold text-xs uppercase text-white bg-budz-green hover:bg-budz-greenLight">Submit Reply</button>
+            </div>
+          `;
+          feed.appendChild(card);
+        });
+      }
+
+      function filterForum(cat, selectedButton) {
+        currentCategory = cat;
+        document.querySelectorAll('.forum-filter-btn').forEach(btn => {
+          btn.classList.remove('bg-budz-green', 'text-white');
+          btn.classList.add('bg-budz-paper', 'text-budz-muted');
+        });
+        const activeButton = selectedButton || document.querySelector(`.forum-filter-btn[onclick*="'${cat}'"]`);
+        if (activeButton) {
+          activeButton.classList.add('bg-budz-green', 'text-white');
+          activeButton.classList.remove('bg-budz-paper', 'text-budz-muted');
+        }
+        renderForumFeed();
+      }
+
+      function toggleNewPostForm() {
+        const box = document.getElementById('new-post-box');
+        box.classList.toggle('hidden');
+      }
+
+      function handleNewPost(e) {
+        e.preventDefault();
+        const author = document.getElementById('post-author').value.trim();
+        const category = document.getElementById('post-category').value;
+        const title = document.getElementById('post-title').value.trim();
+        const content = document.getElementById('post-content').value.trim();
+
+        if (!author || !title || !content) return;
+
+        const posts = getForumPosts();
+        posts.unshift({
+          id: Date.now(),
+          author,
+          category,
+          title,
+          content,
+          date: 'Just now',
+          replies: []
+        });
+
+        localStorage.setItem('budz_emporium_forum_posts', JSON.stringify(posts));
+        document.getElementById('forum-form').reset();
+        toggleNewPostForm();
+        renderForumFeed();
+      }
+
+      function toggleReplyBox(id) {
+        const box = document.getElementById(`reply-box-${id}`);
+        if (box) box.classList.toggle('hidden');
+      }
+
+      function submitReply(id) {
+        const authorInput = document.getElementById(`reply-author-${id}`);
+        const textInput = document.getElementById(`reply-text-${id}`);
+        const author = authorInput.value.trim();
+        const text = textInput.value.trim();
+
+        if (!author || !text) return;
+
+        const posts = getForumPosts();
+        const post = posts.find(p => p.id === id);
+        if (post) {
+          if (!post.replies) post.replies = [];
+          post.replies.push({ author, text });
+          localStorage.setItem('budz_emporium_forum_posts', JSON.stringify(posts));
+          renderForumFeed();
+        }
+      }
+
+      function submitTurkeyApplication(e) {
+        e.preventDefault();
+        const form = e.target;
+        const status = document.getElementById('turkey-application-status');
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const values = Array.from(new FormData(form).entries())
+          .map(([label, value]) => `${label}: ${value}`)
+          .join('\n');
+        const subject = 'Thanksgiving 2026 Turkey Application';
+        const body = [
+          'Thanksgiving 2026 / Community Support application',
+          '',
+          values,
+          '',
+          'Submitted through the Budz Emporium website.'
+        ].join('\n');
+
+        window.location.href = `mailto:luke@ryzabove.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        if (status) {
+          status.textContent = 'Your email app should open with the completed application addressed to luke@ryzabove.com.';
+          status.classList.remove('hidden');
+        }
+      }
+
+      // 4. Contact Form Status Simulation
+      function handleContactSubmit(e) {
+        e.preventDefault();
+        const status = document.getElementById('contact-status');
+        status.textContent = "Thank you for your message! Our team will get back to you within 24 hours.";
+        status.classList.remove('hidden');
+        e.target.reset();
+      }
+
+      // Require age verification before allowing access to the site.
+      function initAgeGate() {
+        const gate = document.getElementById('age-gate');
+        const yesButton = document.getElementById('age-gate-yes');
+        const noButton = document.getElementById('age-gate-no');
+        if (!gate || !yesButton || !noButton) return;
+
+        let verified = false;
+        try {
+          verified = window.sessionStorage.getItem('budz-age-verified') === 'true';
+        } catch (error) {
+          console.warn('[budz] Could not read age verification state:', error);
+        }
+
+        const closeGate = () => {
+          gate.hidden = true;
+          document.body.style.overflow = '';
+        };
+
+        if (verified) {
+          closeGate();
+          return;
+        }
+
+        document.body.style.overflow = 'hidden';
+        yesButton.focus();
+
+        yesButton.addEventListener('click', () => {
+          try {
+            window.sessionStorage.setItem('budz-age-verified', 'true');
+          } catch (error) {
+            console.warn('[budz] Could not save age verification state:', error);
+          }
+          closeGate();
+        });
+
+        noButton.addEventListener('click', () => {
+          window.location.replace('https://www.google.com/');
+        });
+      }
+
+      // Initial Render
+      document.addEventListener('DOMContentLoaded', () => {
+        initAgeGate();
+        renderForumFeed();
+        initHeroParallax();
+      });
+
+      /* ======================================
+         HERO PARALLAX (pointer + scroll)
+         ====================================== */
+      function initHeroParallax() {
+        const hero = document.querySelector('#home');
+        const layers = Array.from(document.querySelectorAll('.forest-img'));
+        if (!hero || !layers.length) return;
+
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReduced) return;
+
+        const state = {
+          pointerX: 0,
+          pointerY: 0,
+          targetX: 0,
+          targetY: 0,
+          scroll: 0,
+          active: true,
+          frame: null
+        };
+
+        layers.forEach((layer, i) => {
+          if (!layer.dataset.depth) {
+            layer.dataset.depth = (i / Math.max(1, layers.length - 1)).toFixed(3);
+          }
+        });
+
+        const render = () => {
+          state.frame = null;
+          const dx = state.targetX - state.pointerX;
+          const dy = state.targetY - state.pointerY;
+          state.pointerX += dx * 0.08;
+          state.pointerY += dy * 0.08;
+
+          const settled = Math.abs(dx) < 0.05 && Math.abs(dy) < 0.05;
+
+          layers.forEach((layer) => {
+            const depth = parseFloat(layer.dataset.depth) || 0;
+            const pointerStrength = 6 + depth * 26;
+            const scrollStrength = 8 + depth * 34;
+            const tx = state.pointerX * pointerStrength;
+            const ty = state.pointerY * pointerStrength + state.scroll * scrollStrength;
+            layer.style.transform = `translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 0)`;
+          });
+
+          if (!settled) {
+            state.frame = requestAnimationFrame(render);
+          }
+        };
+
+        const kick = () => {
+          if (state.frame === null && state.active) {
+            state.frame = requestAnimationFrame(render);
+          }
+        };
+
+        hero.addEventListener('pointermove', (e) => {
+          const rect = hero.getBoundingClientRect();
+          state.targetX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+          state.targetY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+          kick();
+        }, { passive: true });
+
+        hero.addEventListener('pointerleave', () => {
+          state.targetX = 0;
+          state.targetY = 0;
+          kick();
+        });
+
+        window.addEventListener('scroll', () => {
+          const rect = hero.getBoundingClientRect();
+          state.scroll = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)));
+          if (state.active) kick();
+        }, { passive: true });
+
+        if ('IntersectionObserver' in window) {
+          const io = new IntersectionObserver((entries) => {
+            state.active = entries[0].isIntersecting;
+            if (state.active) kick();
+          }, { threshold: 0 });
+          io.observe(hero);
+        } else {
+          state.active = true;
+        }
+      }
+
+      /* ======================================
+         CARD GLOW POINTER TRACKING
+         ====================================== */
+      function initCardGlow() {
+        const cards = document.querySelectorAll('.budz-card');
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const hasHover = window.matchMedia('(hover: hover)').matches;
+        if (prefersReduced || !hasHover) return;
+
+        cards.forEach((card) => {
+          let frame = null;
+
+          const paint = () => {
+            frame = null;
+            card.style.setProperty('--pointer-x', nextX * 100 + '%');
+            card.style.setProperty('--pointer-y', nextY * 100 + '%');
+          };
+
+          let nextX = 0.5;
+          let nextY = 0.5;
+
+          card.addEventListener('pointermove', (e) => {
+            if (e.pointerType !== 'mouse') return;
+            const rect = card.getBoundingClientRect();
+            nextX = (e.clientX - rect.left) / rect.width;
+            nextY = (e.clientY - rect.top) / rect.height;
+            if (frame === null) frame = requestAnimationFrame(paint);
+          }, { passive: true });
+        });
+      }
+
+      // Initial Render
+      document.addEventListener('DOMContentLoaded', () => {
+        renderForumFeed();
+        initHeroParallax();
+        initCardGlow();
+      });
+    </script>
+  </body>
+</html>
